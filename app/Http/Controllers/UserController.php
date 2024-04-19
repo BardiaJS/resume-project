@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Information;
+use App\Models\Personal;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -52,6 +52,7 @@ class UserController extends Controller
             'email' => ['required','email'],
             'password'=> 'required'
         ]);
+        
         if(auth()->attempt($incomingFields)){
             $request->session()->regenerate();
             return redirect('/')->with('message' , 'You are logged in successfully');
@@ -60,23 +61,31 @@ class UserController extends Controller
         }
     }
 
-    //show cv form
+    //show personal info cv form
     public function showPersonalCVForm(User $user){
         return view('personal-cv-form' , ['user'=>$user]);
+        
     }
 
     //set the personal cv data to database and going next step
     public function getPersonalCV(Request $request , User $user){
         $incomingFields = $request->validate([
-            'name'=>['required'],
-            'familyName'=>['required'],
-            'age'=>['required'],
-            'gender'=>['required'],
-            'military'=>['required'],
+            'name'=>'required',
+            'familyName'=>'required',
+            'age'=>'required',
+            'gender'=>'required',
+            'military'=>'required'
         ]);
-        Information::create($incomingFields);
-        $id = $user->id();
+        
+        Personal::create($incomingFields);
+        $id = $user->id;
         return redirect("/create-cv-form/$id/skills")->with('message','Your personal data hav been saved!');
+    }
+
+
+    //show skills cv form
+    public function showSkillsCVForm(User $user){
+        return view('skills-cv-form', ['user'=>$user]);
     }
 
 
