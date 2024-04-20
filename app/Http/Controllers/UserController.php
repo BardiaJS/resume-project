@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Personal;
+use App\Models\Skill;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -79,7 +80,7 @@ class UserController extends Controller
         
         Personal::create($incomingFields);
         $id = $user->id;
-        return redirect("/create-cv-form/$id/skills")->with('message','Your personal data hav been saved!');
+        return redirect("/create-cv-form/$id/skills")->with('message','Your personal data have been saved!');
     }
 
 
@@ -87,6 +88,27 @@ class UserController extends Controller
     public function showSkillsCVForm(User $user){
         return view('skills-cv-form', ['user'=>$user]);
     }
+
+
+
+    //set the skill cv data to database and going next step
+    public function getSkillCV(Request $request , User $user){
+        $incomingFields = $request->validate([
+            'title'=> 'string',
+            'body'=> 'string',
+        ]);
+        Skill::create($incomingFields);
+        $id = $user->id;
+        return redirect("/create-cv-form/$id/skills")->with('message','Your skill data have been saved!');
+    }
+
+
+
+
+    public function getWorkExpForm(User $user){
+        return view('work-experience-cv-form', ['user'=>$user]);
+    }
+    
 
 
 }

@@ -60,7 +60,7 @@
     <div class="row align-items-center">
       <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5" style="text-align: center">
 
-        <form action="/create-cv-form/{{$user->id}}/personal/information" method="POST" id="registration-form">
+        <form action="/create-cv-form/{{$user->id}}/skills/information" method="POST" id="registration-form">
           @csrf
           <div class="form-group" style="text-align: center">
             Enter your skills
@@ -72,16 +72,22 @@
 
           <div class="form-group">
             <label for="email-register" class="text-muted mb-1">Body</label>
-            <input name="body" style="font-size: 13px" id="email-register" class="form-control" type="text" placeholder="Family Name" autocomplete="off" />
+            <input name="body" style="font-size: 13px" id="email-register" class="form-control" type="text" placeholder="Description" autocomplete="off" />
           </div>
 
-          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Confirm
-            <a href="/create-cv-form/{{$user->id}}/skills"></a>
-          </button>
+
+
+                    <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Confirm</button>
 
           
+        </form>
+
+        <form action="/create-cv-form/{{$user->id}}/work-experience/information" method="POST" id="registration-form">
+          @csrf
           <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Next</button>
         </form>
+
+        
       </div>
     </div>
   </div>
