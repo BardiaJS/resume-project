@@ -39,8 +39,20 @@ Route::get('/create-cv-form/{user}/skills', [UserController::class,'showSkillsCV
 //save skill info and go next step
 Route::post('/create-cv-form/{user}/skills/information', [UserController::class,'getSkillCV']);
 
-Route::post('/create-cv-form/{user}/work-experience/information', [UserController::class,'getWorkExpForm']);
+// showing the experience form
+Route::post('/create-cv-form/{user}/work-experience/information', [UserController::class,'showWorkExpCVForm']);
 
+//save experience info and go next step
+Route::post('/create-cv-form/{user}/work-experience/information', [UserController::class,'getWorkExpCV']);
+
+//showing the graduation form 
+Route::get('/create-cv-form/{user}/graduation', [UserController::class,'showGraduationCVForm']);
+
+//save graduation form data info and next step
+Route::post('/create-cv-form/{user}/graduation/information', [UserController::class,'getGraduationCV']);
+
+//choose template for the resume
+Route::get('/choose-template/{user}/resume', [UserController::class,'showTemplates']);
 
 
 

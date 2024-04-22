@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Experience;
+use App\Models\Graduation;
 use App\Models\Personal;
 use App\Models\Skill;
 use App\Models\User;
@@ -104,11 +106,43 @@ class UserController extends Controller
 
 
 
-
-    public function getWorkExpForm(User $user){
+    // show the work experience form 
+    public function showWorkExpCVForm(User $user){
         return view('work-experience-cv-form', ['user'=>$user]);
     }
+
+    //set the work experience data to database
+    public function getWorkExpCV(Request $request , User $user){
+        $incomingFields = $request->validate([
+            'body'=> 'string'
+        ]);
+        Experience::create($incomingFields);
+        $id = $user->id;
+        return redirect("/create-cv-form/$id/graduation")->with('message','Your work experience data have been saved!');
+    }
     
+    // show the graduation form 
+    public function showGraduationCVForm(User $user){
+        return view('graduation-cv-form', ['user'=>$user]);
+    }
+
+    // set the graduation form info to database
+    public function getGraduationCV(Request $request , User $user){
+        $incomingFields = $request->validate([
+            'level'=>'required',
+            'high_school_major'=> 'string',
+            'university_major'=> 'string',
+            'university_name'=> 'string',
+        ]);
+        Graduation::create($incomingFields);
+        $id = $user->id;
+        return redirect("/choose-template/$id/resume")->with('message','Your graduation data have been saved!');
+    }
+
+    // show the template for resume
+    public function showTemplates(User $user){
+        return view('template-page', ['user'=>$user]);
+    }
 
 
 }

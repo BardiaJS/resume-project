@@ -1,4 +1,4 @@
-
+hello
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -58,23 +58,33 @@
   @endif
   <div class="container py-md-5">
     <div class="row align-items-center">
-      <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5" style="text-align: center">
+      <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5">
 
-        <form action="/create-cv-form/{{$user->id}}/experience/information" method="POST" id="registration-form">
+        <form action="/create-cv-form/{{$user->id}}/graduation/information" method="POST" id="registration-form">
           @csrf
-          <div class="form-group" style="text-align: center">
-            Enter some information about your work experience
-          </div>
           <div class="form-group">
-            <label for="username-register" class="text-muted mb-1">Work Experience</label>
-            <input name="body" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Name" autocomplete="off" />
-          </div>   
-          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Next</button>       
+            <label for="username-register" class="text-muted mb-1">Graduation Level</label>
+            <input name="level" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Name" autocomplete="off" />
+          </div>
+
+          <div class="form-group">
+            <label for="email-register" class="text-muted mb-1">What is your major in high school?</label>
+            <input name="high_school_major" style="font-size: 13px" id="email-register" class="form-control" type="text" placeholder="Family Name" autocomplete="off" />
+          </div>
+
+          <div class="form-group">
+            <label for="password-register" class="text-muted mb-1">What is your major in university?(if you are studying now or studied)</label>
+            <input name="university_major" style="font-size: 13px" id="password-register" class="form-control" type="text" placeholder="Age" min="0"/>
+          </div>
+
+          <div class="form-group">
+            <label for="password-register" class="text-muted mb-1">What is(was) your university?(if you are studying now or studied)</label>
+            <input name="university_name" style="font-size: 13px" id="password-register" class="form-control" type="text" placeholder="Age" min="0"/>
+          </div>
+
+
+          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">finish</button>
         </form>
-
-
-
-        
       </div>
     </div>
   </div>
