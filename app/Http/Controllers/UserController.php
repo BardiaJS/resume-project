@@ -141,7 +141,7 @@ class UserController extends Controller
 
     // show the template for resume
     public function showTemplates(User $user){
-        return view('template-page', ['user'=>$user]);
+        return view('first-template', ['user'=>$user]);
     }
 
 

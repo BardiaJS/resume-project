@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/main.css" />
     <script src="//unpkg.com/alpinejs" defer></script>
   </head>
-  <body>
+  <body style="background-image: url('/images/sunflower.jpg'); color:white">
     <header class="header-bar mb-3">
       <div class="container d-flex flex-column flex-md-row align-items-center p-3">
         <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">OurApp</a></h4>
@@ -47,60 +47,64 @@
       </div>
     </header>
     <!-- header ends here -->
+    {{-- personal inforamtion --}}
+    <h1>Personal information</h1>
+    <h3>Name: Jhon</h3>
+    <h3>Family Name: Doe</h3>
+    <h3>Age: 34</h3>
+    <h4>Gender: Male</h4>
+    <h4>Military: Passed</h4>
+    {{-- graduation infromation --}}
+    <h1>Graduation information</h1>
+    <h3>Graduation Level: Doctore</h3>
+    <h3>major in high school: Math</h3>
+    <h3>major in university: Computer engeneering</h3>
+    <h4>university name: Tabriz</h4>
+    {{-- skills information --}}
+    <h1>Skills information</h1>
+    <h2>The skills are</h2>
 
-    @if (session()->has('message'))
-    <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show" class="container container-narrow">
-      <div class="alert text-center" style="background-color: #16a085">
-        {{session('message')}}
-      </div>
-    </div>
-  @endif
-  <div class="container py-md-5">
-    <div class="row align-items-center">
-      <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5">
+    <ol>
+        <li>Html</li>
+        <li>PHP</li>
+        <li>Java script</li>
+    </ol> 
 
-        <form action="/create-cv-form/{{$user->id}}/graduation/information" method="POST" id="registration-form">
-          @csrf
-          <div class="form-group">
-            <label for="username-register" class="text-muted mb-1">Graduation Level</label>
-            <input name="level" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Graduation level" autocomplete="off" />
-          </div>
-
-          <div class="form-group">
-            <label for="email-register" class="text-muted mb-1">What is your major in high school?</label>
-            <input name="high_school_major" style="font-size: 13px" id="email-register" class="form-control" type="text" placeholder="Major in high school" autocomplete="off" />
-          </div>
-
-          <div class="form-group">
-            <label for="password-register" class="text-muted mb-1">What is your major in university?(if you are studying now or studied)</label>
-            <input name="university_major" style="font-size: 13px" id="password-register" class="form-control" type="text" placeholder="Major in university" min="0"/>
-          </div>
-
-          <div class="form-group">
-            <label for="password-register" class="text-muted mb-1">What is(was) your university name?(if you are studying now or studied)</label>
-            <input name="university_name" style="font-size: 13px" id="password-register" class="form-control" type="text" placeholder="University Name" min="0"/>
-          </div>
+       {{-- skills information --}}
+       <h1>Work Experience information</h1>
+       <h2>I worked this places:</h2>
+   
+       <ol>
+           <li>Google</li>
+           <li>Apple</li>
+           <li>Microsoft</li>
+       </ol> 
+       <form action="#" method="GET" class="d-inline">
+        @csrf
+        <div class="col-md-auto">
+          <button class="btn btn-primary btn-sm">Make your resume</button>
+        </div>
+      </form>
 
 
-          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">finish</button>
-        </form>
-      </div>
-    </div>
-  </div>
+
+
+
+
+
+
     <!-- footer begins -->
     <footer class="border-top text-center small text-muted py-3">
-      <p class="m-0">Copyright &copy; {{date('Y')}} <a href="/" class="text-muted">OurApp</a>. All rights reserved.</p>
+        <p class="m-0">Copyright &copy; {{date('Y')}} <a href="/" class="text-muted">OurApp</a>. All rights reserved.</p>
     </footer>
-
+      
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script>
-      $('[data-toggle="tooltip"]').tooltip()
+        $('[data-toggle="tooltip"]').tooltip()
     </script>
-  </body>
+</body>
 </html>
-
-
-
-  
+      
+      
