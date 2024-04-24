@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/main.css" />
     <script src="//unpkg.com/alpinejs" defer></script>
   </head>
-  <body style="background-image: url('/images/sunflower.jpg'); color:white">
+  <body style="background-image: url('/images/sky.jpg'); color:white">
     <header class="header-bar mb-3">
       <div class="container d-flex flex-column flex-md-row align-items-center p-3">
         <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">OurApp</a></h4>
@@ -48,34 +48,33 @@
     </header>
     <!-- header ends here -->
     {{-- personal inforamtion --}}
-    <h1>Personal information</h1>
-    <h3>Name: {{$personal->name}}</h3>
-    <h3>Family Name: {{$personal->familyName}}</h3>
-    <h3>Age: {{$personal->age}}</h3>
-    <h4>Gender: {{$personal->gender}}</h4>
-    <h4>Military: {{$personal->military}}</h4>
+    <h1 style="color: rgb(0, 0, 0);">Personal information</h1>
+    <h3 style="color: rgb(0, 0, 0);">Name: Jhon</h3>
+    <h3 style="color: rgb(0, 0, 0);">Family Name: Doe</h3>
+    <h3 style="color: rgb(0, 0, 0);">Age: 34</h3>
+    <h4 style="color: rgb(0, 0, 0);">Gender: Male</h4>
+    <h4 style="color: rgb(0, 0, 0);">Military: Passed</h4>
     {{-- graduation infromation --}}
-    <h1>Graduation information</h1>
-    <h3>Graduation Level: {{$graduation->level}}</h3>
-    <h3>major in high school: {{$graduation->high_school_major}}</h3>
-    <h3>major in university: {{$graduation->university_major}}</h3>
-    <h4>university name: {{$graduation->university_name}}</h4>
+    <h1 style="color: rgb(0, 0, 0);">Graduation information</h1>
+    <h3 style="color: rgb(0, 0, 0);">Graduation Level: Doctore</h3>
+    <h3 style="color: rgb(0, 0, 0);">major in high school: Math</h3>
+    <h3 style="color: rgb(0, 0, 0);">major in university: Computer engeneering</h3>
+    <h4 style="color: rgb(0, 0, 0);">university name: Tabriz</h4>
     {{-- skills information --}}
-    <h1>Skills information</h1>
-    <h2>The skills are</h2>
+    <h1 style="color: rgb(0, 0, 0);">Skills information</h1>
+    <h2 style="color: rgb(0, 0, 0);">The skills are</h2>
 
-    <ol>
-      @foreach ($skill as $abality)
-        <li>{{$abality->title}}: {{$abality->body}}</li>
-      @endforeach
-
+    <ol style="color: rgb(0, 0, 0);">
+        <li>Html</li>
+        <li>PHP</li>
+        <li>Java script</li>
     </ol> 
 
        {{-- skills information --}}
-       <h1>Work Experience information</h1>
-       <h2>I worked this places:</h2>
+       <h1 style="color: rgb(0, 0, 0);">Work Experience information</h1>
+       <h2 style="color: rgb(0, 0, 0);">I worked this places:</h2>
    
-       <ol>
+       <ol style="color: rgb(0, 0, 0);">
            <li>Google</li>
            <li>Apple</li>
            <li>Microsoft</li>

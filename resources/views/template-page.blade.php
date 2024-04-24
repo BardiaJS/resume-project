@@ -177,14 +177,14 @@ span.psw {
 
 
 {{-- first template --}}
-<button onclick="document.getElementById('image1').style.display='block'" style="width:auto;">Image1</button>
+<button onclick="document.getElementById('image1').style.display='block'" style="width:auto;">Template1</button>
 
 <div id="image1" class="modal">
   
-  <form class="modal-content animate" action="/first-template" method="post">
+  <form class="modal-content animate" action="/first-template/{{$user->id}}" method="GET">
     <div class="imgcontainer">
       <span onclick="document.getElementById('image1').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="" alt="Avatar" class="avatar">
+      <img src="/images/first-template-picture.png" alt="Avatar" class="avatar">
     </div>
 
     <div class="container">
@@ -201,22 +201,18 @@ span.psw {
 </div>
 
 {{-- second template --}}
-<button onclick="document.getElementById('image2').style.display='block'" style="width:auto;">Image2</button>
+<button onclick="document.getElementById('image2').style.display='block'" style="width:auto;">Template2</button>
 
 <div id="image2" class="modal">
   
   <form class="modal-content animate" action="/action_page.php" method="post">
     <div class="imgcontainer">
       <span onclick="document.getElementById('image2').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="img_avatar2.png" alt="Avatar" class="avatar">
+      <img src="/images/second-tamplate-picture.png" alt="Avatar" class="avatar">
     </div>
 
     <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
 
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
         
       <button type="submit">I want this template</button>
 
@@ -229,7 +225,7 @@ span.psw {
 </div>
 
 {{-- third template --}}
-<button onclick="document.getElementById('image3').style.display='block'" style="width:auto;">Image3</button>
+<button onclick="document.getElementById('image3').style.display='block'" style="width:auto;">Template3</button>
 
 <div id="image3" class="modal">
   
@@ -270,7 +266,7 @@ span.psw {
 
 
 {{-- fourth template --}}
-<button onclick="document.getElementById('image4').style.display='block'" style="width:auto;">Image4</button>
+<button onclick="document.getElementById('image4').style.display='block'" style="width:auto;">Template4</button>
 
 <div id="image4" class="modal">
   

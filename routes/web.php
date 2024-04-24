@@ -54,6 +54,9 @@ Route::post('/create-cv-form/{user}/graduation/information', [UserController::cl
 //choose template for the resume
 Route::get('/choose-template/{user}/resume', [UserController::class,'showTemplates']);
 
+//see first template 
+Route::get('/first-template/{user}/{personal}/{skill}/{experience}/{graduation}', [UserController::class,'showFirstTemplate']);
+
 
 
 
