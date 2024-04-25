@@ -60,7 +60,7 @@ class UserController extends Controller
             $request->session()->regenerate();
             return redirect('/')->with('message' , 'You are logged in successfully');
         }else{
-            return redirect('/')->with('alert' , 'Invalid data!');
+            return redirect('/')->with('failure' , 'Invalid data!');
         }
     }
 

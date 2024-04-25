@@ -54,10 +54,10 @@
     </div>
   @endif
 
-  @if (session()->has('alert'))
+  @if (session()->has('failure'))
   <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show" class="container container-narrow">
-    <div class="alert text-center" style="background-color: red">
-      {{session('message')}}
+    <div class="alert text-center" style="background-color: #e60000">
+      {{session('failure')}}
     </div>
   </div>
 @endif
