@@ -9,6 +9,10 @@ class Experience extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'body'
+        'body',
+        'user_id'
     ];
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

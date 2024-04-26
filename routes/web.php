@@ -40,7 +40,7 @@ Route::get('/create-cv-form/{user}/skills', [UserController::class,'showSkillsCV
 Route::post('/create-cv-form/{user}/skills/information', [UserController::class,'getSkillCV']);
 
 // showing the experience form
-Route::post('/create-cv-form/{user}/work-experience/information', [UserController::class,'showWorkExpCVForm']);
+Route::post('/create-cv-form/{user}/work-experience', [UserController::class,'showWorkExpCVForm']);
 
 //save experience info and go next step
 Route::post('/create-cv-form/{user}/work-experience/information', [UserController::class,'getWorkExpCV']);

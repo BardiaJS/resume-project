@@ -77,12 +77,12 @@
 
 
 
-                    <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Confirm</button>
+          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Confirm</button>
 
           
         </form>
 
-        <form action="/create-cv-form/{{$user->id}}/work-experience/information" method="POST" id="registration-form">
+        <form action="/create-cv-form/{{$user->id}}/work-experience" method="POST" id="registration-form">
           @csrf
           <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Next</button>
         </form>
@@ -90,6 +90,19 @@
         
       </div>
     </div>
+  </div>
+  <div>
+   
+      @foreach ($skills as $skill)
+        <div>
+          <div class="" style="border: 1px solid black; text-align:center">
+          <p>{{$skill->title}}</p>
+          <p style="color: green">{{$skill->body}}</p>
+          <a href="">delete</a>
+          </div>
+        </div>
+      @endforeach
+   
   </div>
     <!-- footer begins -->
     <footer class="border-top text-center small text-muted py-3">

@@ -66,7 +66,14 @@ class UserController extends Controller
 
     //show personal info cv form
     public function showPersonalCVForm(User $user){
-        return view('personal-cv-form' , ['user'=>$user]);
+        $data =(bool) $user->personal()->where('user_id', auth()->id())->get();;
+        
+        if($data){
+            $id = $user->id;
+            return redirect("/create-cv-form/$id/skills");
+        }else{
+            return view('personal-cv-form' , ['user'=>$user ]);
+        }
         
     }
 
@@ -79,16 +86,21 @@ class UserController extends Controller
             'gender'=>'required',
             'military'=>'required'
         ]);
+        $incomingFields['name'] = strip_tags($incomingFields['name']);
+        $incomingFields['familyName'] = strip_tags($incomingFields['familyName']);
+        $incomingFields['military'] = strip_tags($incomingFields['military']);
+        $incomingFields['user_id'] = auth()->id();
         
         Personal::create($incomingFields);
         $id = $user->id;
-        return redirect("/create-cv-form/$id/skills")->with('message','Your personal data have been saved!');
+  
+        return redirect("/create-cv-form/$id/skills" )->with('message','Your personal data have been saved!');
     }
 
 
     //show skills cv form
     public function showSkillsCVForm(User $user){
-        return view('skills-cv-form', ['user'=>$user]);
+        return view('skills-cv-form', ['user'=>$user , 'skills' => $user->skill()->latest()->get()]);
     }
 
 
@@ -99,6 +111,9 @@ class UserController extends Controller
             'title'=> 'string',
             'body'=> 'string',
         ]);
+        $incomingFields['title'] = strip_tags($incomingFields['title']);
+        $incomingFields['body'] = strip_tags($incomingFields['body']);
+        $incomingFields['user_id'] = auth()->id();
         Skill::create($incomingFields);
         $id = $user->id;
         return redirect("/create-cv-form/$id/skills")->with('message','Your skill data have been saved!');
@@ -116,6 +131,8 @@ class UserController extends Controller
         $incomingFields = $request->validate([
             'body'=> 'string'
         ]);
+        $incomingFields['body'] = strip_tags($incomingFields['body']);
+        $incomingFields['user_id'] = auth()->id();
         Experience::create($incomingFields);
         $id = $user->id;
         return redirect("/create-cv-form/$id/graduation")->with('message','Your work experience data have been saved!');
@@ -134,6 +151,11 @@ class UserController extends Controller
             'university_major'=> 'string',
             'university_name'=> 'string',
         ]);
+        $incomingFields['level'] = strip_tags($incomingFields['level']);
+        $incomingFields['high_school_major'] = strip_tags($incomingFields['high_school_major']);
+        $incomingFields['university_major'] = strip_tags($incomingFields['university_major']);
+        $incomingFields['university_name'] = strip_tags($incomingFields['university_name']);
+        $incomingFields['user_id'] = auth()->id();
         Graduation::create($incomingFields);
         $id = $user->id;
         return redirect("/choose-template/$id/resume")->with('message','Your graduation data have been saved!');

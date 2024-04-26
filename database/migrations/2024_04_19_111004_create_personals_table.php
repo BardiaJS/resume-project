@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('age');
             $table->string('gender');
             $table->string('military');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->references('id')->on('users');
             $table->timestamps();
         });
     }

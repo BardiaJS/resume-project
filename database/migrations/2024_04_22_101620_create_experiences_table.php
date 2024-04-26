@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('experiences', function (Blueprint $table) {
             $table->id();
             $table->string('body')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->references('id')->on('users');
             $table->timestamps();
         });
     }

@@ -14,5 +14,8 @@ class Personal extends Model
         'age',
         'gender',
         'military',
+        'user_id'
     ];
-}
+    public function user(){
+        return $this->belongsTo(User::class);
+    }}

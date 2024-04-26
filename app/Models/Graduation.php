@@ -13,5 +13,9 @@ class Graduation extends Model
         'high_school_major',
         'university_major',
         'university_name',
+        'user_id'
     ];
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

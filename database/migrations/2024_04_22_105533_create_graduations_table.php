@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('graduations', function (Blueprint $table) {
             $table->string('level')->default('');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->references('id')->on('users');
             $table->string('high_school_major')->nullable();
             $table->string('university_major')->nullable();
             $table->string('university_name')->nullable();
@@ -27,4 +28,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('graduations');
     }
+    
 };
