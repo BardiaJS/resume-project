@@ -47,14 +47,14 @@ class User extends Authenticatable
     public function personal(){
         return $this->hasOne(Personal::class);
     }
-    public function skill():HasMany{
+    public function skill(){
         return $this->hasMany(Skill::class , 'user_id');
     }
-    public function experience():HasMany{
-        return $this->hasMany(Experience::class);
+    public function experience(){
+        return $this->hasMany(Experience::class, 'user_id');
     }
-    public function graduation():HasMany{
-        return $this->hasMany(Graduation::class);
+    public function graduation(){
+        return $this->hasMany(Graduation::class , 'user_id');
     }
     
 }

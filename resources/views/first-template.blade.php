@@ -20,8 +20,8 @@
         
           @auth
           <div class="flex-row my-3 my-md-0">
-            @if (auth()->user()->isCreateCV == 1)
-              <a href="#" class="mr-2"><img title="My Profile" data-toggle="tooltip" data-placement="bottom" style="width: 32px; height: 32px; border-radius: 16px" src="https://gravatar.com/avatar/f64fc44c03a8a7eb1d52502950879659?s=128" /></a>
+            @if(auth()->user()->isCreateCV == 1)
+              <a href="#" class="mr-2" style="pointer-events: "><img title="My Profile" data-toggle="tooltip" data-placement="bottom" style="width: 32px; height: 32px; border-radius: 16px" src="https://gravatar.com/avatar/f64fc44c03a8a7eb1d52502950879659?s=128" /></a>
             @endif
             <div>
               <a href="/" style="text-decoration:none; color:black; margin-left:0%"><img width="24" height="24" src="https://img.icons8.com/material-rounded/24/back--v1.png"/>Back</a>
@@ -56,32 +56,35 @@
     <h4>Military: {{$personal->military}}</h4>
     {{-- graduation infromation --}}
     <h1>Graduation information</h1>
+    @foreach ($graduations as $graduation)
     <h3>Graduation Level: {{$graduation->level}}</h3>
     <h3>major in high school: {{$graduation->high_school_major}}</h3>
     <h3>major in university: {{$graduation->university_major}}</h3>
     <h4>university name: {{$graduation->university_name}}</h4>
+    @endforeach
+  
+    
     {{-- skills information --}}
     <h1>Skills information</h1>
     <h2>The skills are</h2>
 
     <ol>
-      @foreach ($skill as $abality)
-        <li>{{$abality->title}}: {{$abality->body}}</li>
+      @foreach ($skills as $skill)
+        <li>{{$skill->title}}: {{$skill->body}}</li><br>
       @endforeach
 
     </ol> 
 
        {{-- skills information --}}
        <h1>Work Experience information</h1>
-       <h2>I worked this places:</h2>
-   
-       <ol>
-           <li>Google</li>
-           <li>Apple</li>
-           <li>Microsoft</li>
-       </ol> 
-       <form action="#" method="GET" class="d-inline">
-        @csrf
+       <h2>
+        @foreach ($experiences as $experience)
+        <h3> {{$experience->body}}</h3>
+
+        @endforeach
+      </h2>
+  
+       <form action="/" method="GET" class="d-inline">
         <div class="col-md-auto">
           <button class="btn btn-primary btn-sm">Make your resume</button>
         </div>

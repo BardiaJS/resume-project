@@ -205,7 +205,7 @@ span.psw {
 
 <div id="image2" class="modal">
   
-  <form class="modal-content animate" action="/action_page.php" method="post">
+  <form class="modal-content animate" action="/second-template/{{$user->id}}" method="GET">
     <div class="imgcontainer">
       <span onclick="document.getElementById('image2').style.display='none'" class="close" title="Close Modal">&times;</span>
       <img src="/images/second-tamplate-picture.png" alt="Avatar" class="avatar">
@@ -229,7 +229,7 @@ span.psw {
 
 <div id="image3" class="modal">
   
-  <form class="modal-content animate" action="/action_page.php" method="post">
+  <form class="modal-content animate" action="/third-template/{{$user->id}}" method="GET">
     <div class="imgcontainer">
       <span onclick="document.getElementById('image3').style.display='none'" class="close" title="Close Modal">&times;</span>
       <img src="/images/third-template.png" alt="Avatar" class="avatar">
@@ -266,7 +266,7 @@ span.psw {
 
 <div id="image4" class="modal">
   
-  <form class="modal-content animate" action="/action_page.php" method="post">
+  <form class="modal-content animate" action="/fourth-template/{{$user->id}}" method="GET">
     <div class="imgcontainer">
       <span onclick="document.getElementById('image4').style.display='none'" class="close" title="Close Modal">&times;</span>
       <img src="/images/fourth-template.png" alt="Avatar" class="avatar">

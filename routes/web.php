@@ -55,7 +55,16 @@ Route::post('/create-cv-form/{user}/graduation/information', [UserController::cl
 Route::get('/choose-template/{user}/resume', [UserController::class,'showTemplates']);
 
 //see first template 
-Route::get('/first-template/{user}/{personal}/{skill}/{experience}/{graduation}', [UserController::class,'showFirstTemplate']);
+Route::get('/first-template/{user}', [UserController::class,'showFirstTemplate']);
+
+//see second template 
+Route::get('/second-template/{user}', [UserController::class,'showSecondTemplate']);
+
+//see third template 
+Route::get('/third-template/{user}', [UserController::class,'showThirdTemplate']);
+
+//see fourth template 
+Route::get('/fourth-template/{user}', [UserController::class,'showFourthTemplate']);
 
 
 

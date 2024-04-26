@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Skill;
+use App\Models\Personal;
 use App\Models\Experience;
 use App\Models\Graduation;
-use App\Models\Personal;
-use App\Models\Skill;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -66,13 +67,12 @@ class UserController extends Controller
 
     //show personal info cv form
     public function showPersonalCVForm(User $user){
-        $data =(bool) $user->personal()->where('user_id', auth()->id())->get();;
-        
+        $data =(bool)DB::table('personals')->where('user_id', auth()->id())->first();       
         if($data){
             $id = $user->id;
             return redirect("/create-cv-form/$id/skills");
         }else{
-            return view('personal-cv-form' , ['user'=>$user ]);
+            return view('personal-cv-form' , ['user'=>$user]);
         }
         
     }
@@ -146,7 +146,7 @@ class UserController extends Controller
     // set the graduation form info to database
     public function getGraduationCV(Request $request , User $user){
         $incomingFields = $request->validate([
-            'level'=>'required',
+            'level'=>'required|string',
             'high_school_major'=> 'string',
             'university_major'=> 'string',
             'university_name'=> 'string',
@@ -168,9 +168,59 @@ class UserController extends Controller
 
 
     //show the first template
-    public function showFirstTemplate(User $user , Personal $personal , Skill $skill , Experience $experience , Graduation $graduation){  
+    public function showFirstTemplate(User $user){
+        $id = auth()->id();
+        $personal = $user->personal;
+        $skill = $user->skill()->latest()->get();
+        $experience = $user->experience()->latest()->get();
+        $graduation =  $user->graduation()->latest()->get();
+        $user->isCreateCV = 1;
+        $user->save();
 
-        return view('first-template', ['user'=>$user , 'personal' => $personal , 'skill' => $skill , 'experience' => $experience , 'graduation' => $graduation]);
+        return view('first-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
+
+    }
+
+       //show the second template
+       public function showSecondTemplate(User $user){
+        $id = auth()->id();
+        $personal = $user->personal;
+        $skill = $user->skill()->latest()->get();
+        $experience = $user->experience()->latest()->get();
+        $graduation =  $user->graduation()->latest()->get();
+        $user->isCreateCV = 1;
+        $user->save();
+
+        return view('second-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
+
+    }
+
+       //show the third template
+       public function showThirdTemplate(User $user){
+        $id = auth()->id();
+        $personal = $user->personal;
+        $skill = $user->skill()->latest()->get();
+        $experience = $user->experience()->latest()->get();
+        $graduation =  $user->graduation()->latest()->get();
+        $user->isCreateCV = 1;
+        $user->save();
+
+        return view('third-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
+
+    }
+
+       //show the fourth template
+       public function showFourthTemplate(User $user){
+        $id = auth()->id();
+        $personal = $user->personal;
+        $skill = $user->skill()->latest()->get();
+        $experience = $user->experience()->latest()->get();
+        $graduation =  $user->graduation()->latest()->get();
+        $user->isCreateCV = 1;
+        $user->save();
+
+        return view('fourth-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
+
     }
 
 

@@ -98,7 +98,12 @@
           <div class="" style="border: 1px solid black; text-align:center">
           <p>{{$skill->title}}</p>
           <p style="color: green">{{$skill->body}}</p>
-          <a href="">delete</a>
+          <form action="/delete/{{$user->id}}/skills" method="POST" id="registration-form">
+            @csrf
+            @DELETE
+            <a href="">delete</a>
+
+          </form>
           </div>
         </div>
       @endforeach
