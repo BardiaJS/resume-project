@@ -85,7 +85,7 @@
        <form action="/" method="GET" class="d-inline">
         @csrf
         <div class="col-md-auto">
-          <button class="btn btn-primary btn-sm">Make your resume</button>
+          <button class="btn btn-primary btn-sm">Confirm</button>
         </div>
       </form>
 

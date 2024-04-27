@@ -175,6 +175,7 @@ class UserController extends Controller
         $experience = $user->experience()->latest()->get();
         $graduation =  $user->graduation()->latest()->get();
         $user->isCreateCV = 1;
+        $user->wichTeplate = 1;
         $user->save();
 
         return view('first-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
@@ -189,6 +190,7 @@ class UserController extends Controller
         $experience = $user->experience()->latest()->get();
         $graduation =  $user->graduation()->latest()->get();
         $user->isCreateCV = 1;
+        $user->wichTeplate = 2;
         $user->save();
 
         return view('second-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
@@ -203,6 +205,7 @@ class UserController extends Controller
         $experience = $user->experience()->latest()->get();
         $graduation =  $user->graduation()->latest()->get();
         $user->isCreateCV = 1;
+        $user->wichTeplate = 3;
         $user->save();
 
         return view('third-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
@@ -217,11 +220,29 @@ class UserController extends Controller
         $experience = $user->experience()->latest()->get();
         $graduation =  $user->graduation()->latest()->get();
         $user->isCreateCV = 1;
+        $user->wichTeplate = 4;
         $user->save();
 
         return view('fourth-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
 
     }
 
+    //show user resume after making it
+    public function showResume(User $user){
+        $id = $user->id;
+        if($user->wichTeplate == 1){
+            return redirect("/first-template/$id");
+        }else if($user->wichTeplate == 2){
+            return redirect("/second-template/$id");
 
+        }else if($user->wichTeplate == 3){
+            return redirect("/third-template/$id");
+
+        }else{
+            return redirect("/fourth-template/$id");
+
+        }
+
+
+}
 }

@@ -21,7 +21,7 @@
           @auth
           <div class="flex-row my-3 my-md-0">
             @if (auth()->user()->isCreateCV == 1)
-            <a class="btn btn-sm btn-success mr-2" href="/create-cv-form/{{auth()->user()->id}}/personal" style="pointer-events: none">CV has been created</a>
+            <a class="btn btn-sm btn-success mr-2" href="/show-resume/{{auth()->user()->id}}">See your cv</a>
             <a href="#" class="mr-2"><img title="My Profile" data-toggle="tooltip" data-placement="bottom" style="width: 32px; height: 32px; border-radius: 16px" src="https://gravatar.com/avatar/f64fc44c03a8a7eb1d52502950879659?s=128" /></a>
             @else
             <a class="btn btn-sm btn-success mr-2" href="/create-cv-form/{{auth()->user()->id}}/personal">Create CV</a>

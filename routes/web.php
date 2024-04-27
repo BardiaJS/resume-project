@@ -66,6 +66,9 @@ Route::get('/third-template/{user}', [UserController::class,'showThirdTemplate']
 //see fourth template 
 Route::get('/fourth-template/{user}', [UserController::class,'showFourthTemplate']);
 
+//show the user resume
+Route::get('/show-resume/{user}', [UserController::class,'showResume']);
+
 
 
 

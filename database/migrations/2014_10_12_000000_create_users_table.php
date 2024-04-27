@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('isCreateCV')->default(0);
+            $table->string('wichTeplate')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
