@@ -259,12 +259,12 @@ class UserController extends Controller
     //save user info changing
     public function saveUserChanging(Request $request , User $user){
         $incomingFields = $request->validate([
-            'username'=>['required','min:3','max:12'],
-            'email'=>['required','email',Rule::unique('users' , 'email')],
-            'password'=>['required','confirmed','min:6']
-         ]);
-         $incomingFields['password'] = bcrypt($incomingFields['password']);
-         $user->update($incomingFields);
+            'username'=>'required',
+            'email'=>'required'
+        ]);
+        $user->update($incomingFields);
+        return redirect('/');
+         
     }
 
     //change personal info form
@@ -302,6 +302,7 @@ class UserController extends Controller
         $incomingFields['body'] = strip_tags($incomingFields['body']);
 
          Skill::where('id',$user->id)->update($incomingFields);
+         Skill::where('id',$user->id)->save();
         
     }
     //show the graduation changeing page
@@ -323,6 +324,8 @@ class UserController extends Controller
         $incomingFields['university_major'] = strip_tags($incomingFields['university_major']);
         $incomingFields['university_name'] = strip_tags($incomingFields['university_name']);
         Graduation::where('id',$user->id)->update($incomingFields);
+        Graduation::where('id',$user->id)->save();
+
     }
 
 
