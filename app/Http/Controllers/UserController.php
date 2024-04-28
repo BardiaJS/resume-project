@@ -263,6 +263,7 @@ class UserController extends Controller
             'email'=>'required'
         ]);
         $user->update($incomingFields);
+        $user->save();
         return redirect('/');
          
     }
@@ -283,6 +284,7 @@ class UserController extends Controller
          ]);
 
          Personal::where('id',$user->id)->update($incomingFields);
+         return redirect('/');
         
     }
 
@@ -300,9 +302,8 @@ class UserController extends Controller
         ]);
         $incomingFields['title'] = strip_tags($incomingFields['title']);
         $incomingFields['body'] = strip_tags($incomingFields['body']);
-
-         Skill::where('id',$user->id)->update($incomingFields);
-         Skill::where('id',$user->id)->save();
+        Skill::create($incomingFields);
+        return redirect('/');
         
     }
     //show the graduation changeing page
@@ -324,7 +325,6 @@ class UserController extends Controller
         $incomingFields['university_major'] = strip_tags($incomingFields['university_major']);
         $incomingFields['university_name'] = strip_tags($incomingFields['university_name']);
         Graduation::where('id',$user->id)->update($incomingFields);
-        Graduation::where('id',$user->id)->save();
 
     }
 

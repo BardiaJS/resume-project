@@ -68,10 +68,9 @@
           </div>
 
           <div class="form-group">
-            <label for="email-register" class="text-muted mb-1">Family Name</label>
-            <input name="familyName" style="font-size: 13px" id="email-register" class="form-control" type="text" placeholder="Family Name" autocomplete="off" value="{{$personal->familyName}} />
+            <for="emaillabel-register" class="text-muted mb-1">Family Name</label>
+            <input name="familyName" style="font-size: 13px" id="email-register" class="form-control" type="text" placeholder="Family Name" autocomplete="off" value="{{$personal->familyName}}">
           </div>
-
           <div class="form-group">
             <label for="password-register" class="text-muted mb-1">Age</label>
             <input name="age" style="font-size: 13px" id="password-register" class="form-control" type="number" placeholder="Age" min="0" value="{{$personal->age}}"/>

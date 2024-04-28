@@ -60,7 +60,7 @@
     <div class="row align-items-center">
       <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5" style="text-align: center">
 
-        <form action="/create-cv-form/{{$user->id}}/edit/skill/save'" method="POST" id="registration-form">
+        <form action="/create-cv-form/{{$user->id}}/edit/skill/save" method="POST" id="registration-form">
           @csrf
           <div class="form-group" style="text-align: center">
             Enter your skills

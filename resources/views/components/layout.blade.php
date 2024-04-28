@@ -22,7 +22,7 @@
           <div class="flex-row my-3 my-md-0">
             @if (auth()->user()->isCreateCV == 1)
             <a class="btn btn-sm btn-success mr-2" href="/show-resume/{{auth()->user()->id}}">See your cv</a>
-            <a href="/change-profile/{{auth()->user()->id}}"><button class="btn btn-primary btn-sm">See your profile</button>
+            <a href="/change-profile/{{auth()->user()->id}}"><button class="btn btn-primary btn-sm">change profile</button>
             </a>
             @else
             <a class="btn btn-sm btn-success mr-2" href="/create-cv-form/{{auth()->user()->id}}/personal">Create CV</a>
