@@ -244,5 +244,93 @@ class UserController extends Controller
         }
 
 
-}
+    }
+
+    //show change setting list
+    public function showProfilePage(User $user){
+        return view('profile-page', ["user"=>$user]);
+    }
+
+    //change user info form
+    public function showChangeUserInfo(User $user){
+        return view('change-user', ["user"=>$user]);
+    }
+
+    //save user info changing
+    public function saveUserChanging(Request $request , User $user){
+        $incomingFields = $request->validate([
+            'username'=>['required','min:3','max:12'],
+            'email'=>['required','email',Rule::unique('users' , 'email')],
+            'password'=>['required','confirmed','min:6']
+         ]);
+         $incomingFields['password'] = bcrypt($incomingFields['password']);
+         $user->update($incomingFields);
+    }
+
+    //change personal info form
+    public function showChangePersonalInfo(User $user){
+        $personal = $user->personal;
+        return view ('change-personal', ["user"=>$user , 'personal' => $personal]);
+    }
+
+    public function savePersonalChanging(Request $request, User $user){
+        $incomingFields = $request->validate([
+            'name'=>['required'],
+            'familyName'=>['required'],
+            'age'=>['required'],
+            'gender'=>['required'],
+            'military'=>['required']
+         ]);
+
+         Personal::where('id',$user->id)->update($incomingFields);
+        
+    }
+
+    //show skill changing form
+    public function showChangeSkillInfo(User $user){
+        $skill = $user->skill()->latest()->get();
+        return view ('change-skill', ["user"=>$user , 'skills' => $skill]);
+    }
+
+    //save skill information changing
+    public function saveSkillChanging(Request $request, User $user){
+        $incomingFields = $request->validate([
+            'title'=> 'string',
+            'body'=> 'string',
+        ]);
+        $incomingFields['title'] = strip_tags($incomingFields['title']);
+        $incomingFields['body'] = strip_tags($incomingFields['body']);
+
+         Skill::where('id',$user->id)->update($incomingFields);
+        
+    }
+    //show the graduation changeing page
+    public function showChangeGraduationInfo(User $user){
+        $graduation =  $user->graduation()->latest()->get();
+        return view ('change-graduation', ["user"=>$user , 'graduations' => $graduation]);
+    }
+
+    //save the graduation information
+    public function saveGraduationChanging(Request $request, User $user){
+        $incomingFields = $request->validate([
+            'level'=>'required|string',
+            'high_school_major'=> 'string',
+            'university_major'=> 'string',
+            'university_name'=> 'string',
+        ]);
+        $incomingFields['level'] = strip_tags($incomingFields['level']);
+        $incomingFields['high_school_major'] = strip_tags($incomingFields['high_school_major']);
+        $incomingFields['university_major'] = strip_tags($incomingFields['university_major']);
+        $incomingFields['university_name'] = strip_tags($incomingFields['university_name']);
+        Graduation::where('id',$user->id)->update($incomingFields);
+    }
+
+
+
+    //show the experience changig page
+    public function showChangeExperienceInfo(User $user){
+        $experience = $user->experience()->latest()->get();
+        return view ('change-experience', ["user"=>$user , 'experiences' => $experience]);
+    }
+
 }

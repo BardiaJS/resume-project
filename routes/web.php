@@ -69,6 +69,42 @@ Route::get('/fourth-template/{user}', [UserController::class,'showFourthTemplate
 //show the user resume
 Route::get('/show-resume/{user}', [UserController::class,'showResume']);
 
+//show change setting list
+Route::get('/change-profile/{user}', [UserController::class,'showProfilePage']);
+
+//show changing user info form
+Route::get('/create-cv-form/{user}/edit/user', [UserController::class,'showChangeUserInfo']);
+
+//save the user edit settings
+Route::post('/create-cv-form/{user}/edit/user/save', [UserController::class,'saveUserChanging']);
+
+//show chnging personal info form
+Route::get('/create-cv-form/{user}/edit/personal', [UserController::class,'showChangePersonalInfo']);
+
+//save the personal edit settings
+Route::post('/create-cv-form/{user}/edit/personal/save', [UserController::class,'savePersonalChanging']);
+
+//show chnging skill info form
+Route::get('/create-cv-form/{user}/edit/skill', [UserController::class,'showChangeSkillInfo']);
+
+//save the skill edit settings
+Route::post('/create-cv-form/{user}/edit/skill/save', [UserController::class,'saveSkillChanging']);
+
+//show chnging graduation info form
+Route::get('/create-cv-form/{{$user->id}}/edit/graduation', [UserController::class,'showChangeGraduationInfo']);
+
+//save the graduation edit settings
+Route::post('/create-cv-form/{user}/edit/graduation/save', [UserController::class,'saveGraduationChanging']);
+
+//show changing experience form
+Route::get('/create-cv-form/{user}/edit/experience', [UserController::class,'showChangeExperienceInfo']);
+
+//save the experience edit settings
+Route::post('/create-cv-form/{user}/edit/experience/save', [UserController::class,'saveExperienceChanging']);
+
+
+
+
 
 
 
