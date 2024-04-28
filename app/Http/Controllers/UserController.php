@@ -369,4 +369,13 @@ class UserController extends Controller
         return redirect("/change-profile/$id");   
     }
 
+    //see the forget password page
+    public function showForgetPassPage(User $user){
+        return view('froget-password' , ['user'=>$user]);
+    }
+
+    public function changeTheForgetPassword(Request $request, User $user){
+        return 'hello';
+    }
+
 }

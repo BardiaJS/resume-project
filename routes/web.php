@@ -111,6 +111,12 @@ Route::get('/create-cv-form/{user}/edit/password', [UserController::class,'showC
 //save the password edit settings
 Route::post('/create-cv-form/{user}/edit/password/save', [UserController::class,'savePasswordChanging']);
 
+//see the forgetting password
+Route::get('/forget-password', [UserController::class,'showForgetPassPage']);
+
+//change forget password
+Route::post('/forget-password/{user}/save', [UserController::class,'changeTheForgetPassword']);
+
 
 
 

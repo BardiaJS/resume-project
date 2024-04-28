@@ -40,7 +40,14 @@
                   <button class="btn btn-primary btn-sm">Already have an account?</button>
                 </div>
               </form>
-             
+
+              <form action="/forget-password" method="GET" class="d-inline">
+                @csrf
+                <div class="col-md-auto">
+                  <button class="btn btn-primary btn-sm">Forget the password?</button>
+                </div>
+              </form>
+                             
             </div>
           @endauth
          
