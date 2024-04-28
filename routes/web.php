@@ -91,7 +91,7 @@ Route::get('/create-cv-form/{user}/edit/skill', [UserController::class,'showChan
 Route::post('/create-cv-form/{user}/edit/skill/save', [UserController::class,'saveSkillChanging']);
 
 //show chnging graduation info form
-Route::get('/create-cv-form/{{$user->id}}/edit/graduation', [UserController::class,'showChangeGraduationInfo']);
+Route::get('/create-cv-form/{user}/edit/graduation', [UserController::class,'showChangeGraduationInfo']);
 
 //save the graduation edit settings
 Route::post('/create-cv-form/{user}/edit/graduation/save', [UserController::class,'saveGraduationChanging']);
@@ -102,6 +102,14 @@ Route::get('/create-cv-form/{user}/edit/experience', [UserController::class,'sho
 //save the experience edit settings
 Route::post('/create-cv-form/{user}/edit/experience/save', [UserController::class,'saveExperienceChanging']);
 
+//show changing template form
+Route::get('/create-cv-form/{user}/edit/template', [UserController::class,'showChangeTemplateInfo']);
+
+//show changing password form
+Route::get('/create-cv-form/{user}/edit/password', [UserController::class,'showChangePasswordInfo']);
+
+//save the password edit settings
+Route::post('/create-cv-form/{user}/edit/password/save', [UserController::class,'savePasswordChanging']);
 
 
 

@@ -260,12 +260,12 @@ class UserController extends Controller
     public function saveUserChanging(Request $request , User $user){
         $incomingFields = $request->validate([
             'username'=>'required',
-            'email'=>'required'
+            'email'=>['required','email',Rule::unique('users' , 'email')]
         ]);
         $user->update($incomingFields);
         $user->save();
-        return redirect('/');
-         
+        $id = $user->id;
+        return redirect("/change-profile/$id");         
     }
 
     //change personal info form
@@ -284,8 +284,8 @@ class UserController extends Controller
          ]);
 
          Personal::where('id',$user->id)->update($incomingFields);
-         return redirect('/');
-        
+         $id = $user->id;
+         return redirect("/change-profile/$id");        
     }
 
     //show skill changing form
@@ -303,13 +303,13 @@ class UserController extends Controller
         $incomingFields['title'] = strip_tags($incomingFields['title']);
         $incomingFields['body'] = strip_tags($incomingFields['body']);
         Skill::create($incomingFields);
-        return redirect('/');
-        
+        $id = $user->id;
+        return redirect("/change-profile/$id");        
     }
     //show the graduation changeing page
     public function showChangeGraduationInfo(User $user){
         $graduation =  $user->graduation()->latest()->get();
-        return view ('change-graduation', ["user"=>$user , 'graduations' => $graduation]);
+        return view ('change-graduation', ['user'=>$user , 'graduations' => $graduation]);
     }
 
     //save the graduation information
@@ -324,7 +324,9 @@ class UserController extends Controller
         $incomingFields['high_school_major'] = strip_tags($incomingFields['high_school_major']);
         $incomingFields['university_major'] = strip_tags($incomingFields['university_major']);
         $incomingFields['university_name'] = strip_tags($incomingFields['university_name']);
-        Graduation::where('id',$user->id)->update($incomingFields);
+        Graduation::where('user_id',$user->id)->update($incomingFields);
+        $id = $user->id;
+        return redirect("/change-profile/$id");
 
     }
 
@@ -334,6 +336,37 @@ class UserController extends Controller
     public function showChangeExperienceInfo(User $user){
         $experience = $user->experience()->latest()->get();
         return view ('change-experience', ["user"=>$user , 'experiences' => $experience]);
+    }
+
+
+    //save the experieince change 
+    public function saveExperienceChanging(Request $request, User $user){
+        $incomingFields = $request->validate([
+            'body'=> 'string',
+        ]);
+        $incomingFields['body'] = strip_tags($incomingFields['body']);
+        Experience::where('user_id',$user->id)->update($incomingFields);
+        $id = $user->id;
+        return redirect("/change-profile/$id");
+    }
+
+    //show changing template form
+    public function showChangeTemplateInfo(User $user){
+        return view('template-page' , ['user'=>$user]);
+    }
+
+    public function showChangePasswordInfo(User $user){
+        return view('change-password', ['user'=>$user]);
+    }
+    //change the password and save in database
+    public function savePasswordChanging(Request $request, User $user){
+        $incomingFields = $request->validate([
+            'password'=>['required','confirmed','min:6']
+        ]);
+        $incomingFields['password'] = bcrypt($incomingFields['password']);
+        User::where('id',$user->id)->update($incomingFields);
+        $id = $user->id;
+        return redirect("/change-profile/$id");   
     }
 
 }

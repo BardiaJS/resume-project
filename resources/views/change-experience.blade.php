@@ -60,11 +60,11 @@
     <div class="row align-items-center">
       <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5" style="text-align: center">
 
-        <form action="/change-profile/{{$user->id}}" method="POST" id="registration-form">
+        <form action="/create-cv-form/{{$user->id}}/edit/experience/save" method="POST" id="registration-form">
           @csrf
+          @method('POST')
           @foreach ($experiences as $experience)
               
-          @endforeach
           <div class="form-group" style="text-align: center">
             Enter some information about your work experience
           </div>
@@ -72,6 +72,8 @@
             <label for="username-register" class="text-muted mb-1">Work Experience</label>
             <input value="{{$experience->body}}" name="body" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Name" autocomplete="off" />
           </div>   
+          @endforeach
+
           <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">save changes</button>       
         </form>
 

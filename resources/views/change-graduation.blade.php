@@ -59,13 +59,14 @@
     <div class="row align-items-center">
       <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5">
 
-        <form action="/change-profile/{{$user->id}}" method="POST" id="registration-form">
+        <form action="/create-cv-form/{{$user->id}}/edit/graduation/save" method="POST" id="registration-form">
           @csrf
+          @method('POST')
           @foreach ($graduations as $graduation)
           <div class="form-group">
             
               
-            @endforeach
+            
             <label for="username-register" class="text-muted mb-1">Graduation Level</label>
             <input value="{{$graduation->level}}" name="level" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Graduation level" autocomplete="off" />
           </div>
