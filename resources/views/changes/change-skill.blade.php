@@ -60,7 +60,7 @@
     <div class="row align-items-center">
       <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5" style="text-align: center">
 
-        <form action="/create-cv-form/{{$user->id}}/skills/information" method="POST" id="registration-form">
+        <form action="/create-cv-form/{{$user->id}}/edit/skill/save" method="POST" id="registration-form">
           @csrf
           <div class="form-group" style="text-align: center">
             Enter your skills
@@ -82,9 +82,9 @@
           
         </form>
 
-        <form action="/create-cv-form/{{$user->id}}/work-experience" method="POST" id="registration-form">
+        <form action="/change-profile/{{$user->id}}" method="POST" id="registration-form">
           @csrf
-          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Next</button>
+          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">save changes</button>
         </form>
 
         
@@ -94,18 +94,22 @@
   <div>
    
       @foreach ($skills as $skill)
-        <div>
-          <div class="" style="border: 1px solid black; text-align:center">
-          <p>{{$skill->title}}</p>
-          <p style="color: green">{{$skill->body}}</p>
-          <form action="/delete/{{$user->id}}/skills" method="POST" id="registration-form">
-            @csrf
-            @DELETE
-            <a href="">delete</a>
+      <div>
+            
+         
+        <div class="" style="border: 1px solid black; text-align:center">
+        <p>{{$skill->title}}</p>
+        <p style="color: green">{{$skill->body}}</p>
+        @can('update' , $skill)
+        <form action="/delete/{{$skill->id}}/{{$users->id}}/change" method="POST" id="registration-form">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">delete</button>
 
-          </form>
-          </div>
+        </form>
+        @endcan
         </div>
+      </div>
       @endforeach
    
   </div>

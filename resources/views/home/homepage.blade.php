@@ -29,6 +29,12 @@
               <input name="password_confirmation" id="password-register-confirm" class="form-control" type="password" placeholder="Confirm password" />
             </div>
 
+            <div class="form-group">
+              <label for="username-register" class="text-muted mb-1"><small>Security Question(Remember for password if you forget it)</small></label>
+              <input name="first_high_school_name" id="username-register" class="form-control" type="text" placeholder="What is your first high school name?" autocomplete="off" />
+            </div>
+
+
             <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Sign up for OurApp</button>
           </form>
         </div>

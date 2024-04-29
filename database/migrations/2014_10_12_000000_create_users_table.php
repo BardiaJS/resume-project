@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->boolean('isCreateCV')->default(0);
             $table->string('wichTeplate')->nullable();
+            $table->string('first_high_school_name');
             $table->rememberToken();
             $table->timestamps();
         });

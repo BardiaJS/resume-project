@@ -56,11 +56,19 @@
       </div>
     </div>
   @endif
+
+  @if (session()->has('failure'))
+  <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show" class="container container-narrow">
+    <div class="alert text-center" style="background-color: #fd0a0a">
+      {{session('failure')}}
+    </div>
+  </div>
+@endif
   <div class="container py-md-5">
     <div class="row align-items-center">
       <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5" style="text-align: center">
 
-        <form action="/create-cv-form/{{$user->id}}/edit/skill/save" method="POST" id="registration-form">
+        <form action="/create-cv-form/{{$user->id}}/skills/information" method="POST" id="registration-form">
           @csrf
           <div class="form-group" style="text-align: center">
             Enter your skills
@@ -82,9 +90,9 @@
           
         </form>
 
-        <form action="/change-profile/{{$user->id}}" method="POST" id="registration-form">
+        <form action="/create-cv-form/{{$user->id}}/work-experience" method="POST" id="registration-form">
           @csrf
-          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">save changes</button>
+          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Next</button>
         </form>
 
         
@@ -94,15 +102,22 @@
   <div>
    
       @foreach ($skills as $skill)
+      
+
         <div>
+            
+         
           <div class="" style="border: 1px solid black; text-align:center">
           <p>{{$skill->title}}</p>
           <p style="color: green">{{$skill->body}}</p>
-          <form action="/delete/{{$user->id}}/skills" method="POST" id="registration-form">
+          @can('update' , $skill)
+          <form action="/delete/{{$skill->id}}/{{$user->id}}" method="POST" id="registration-form">
             @csrf
-            <a href="">delete</a>
+            @method('DELETE')
+            <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">delete</button>
 
           </form>
+          @endcan
           </div>
         </div>
       @endforeach

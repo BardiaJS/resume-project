@@ -18,9 +18,9 @@ class UserController extends Controller
     //show correct page 
     public function showCorrectPage(){
         if(auth()->check()){
-            return view("user-logged-in-page");
+            return view("user.user-logged-in-page");
         }else{
-            return view("homepage");
+            return view("home.homepage");
         }
             
     }
@@ -30,7 +30,9 @@ class UserController extends Controller
         $incomingFields = $request->validate([
             'username'=>['required','min:3','max:12'],
             'email'=>['required','email',Rule::unique('users' , 'email')],
-            'password'=>['required','confirmed','min:6']
+            'password'=>['required','confirmed','min:6'],
+            'first_high_school_name'=>['required']
+
          ]);
          $incomingFields['password'] = bcrypt($incomingFields['password']);
 
@@ -41,7 +43,7 @@ class UserController extends Controller
 
     //logging in the user
     public function loginUserForm(){
-        return view('login-page');
+        return view('user.login-page');
     }
 
     //signing out the user
@@ -72,7 +74,7 @@ class UserController extends Controller
             $id = $user->id;
             return redirect("/create-cv-form/$id/skills");
         }else{
-            return view('personal-cv-form' , ['user'=>$user]);
+            return view('resume.personal-cv-form' , ['user'=>$user]);
         }
         
     }
@@ -100,7 +102,7 @@ class UserController extends Controller
 
     //show skills cv form
     public function showSkillsCVForm(User $user){
-        return view('skills-cv-form', ['user'=>$user , 'skills' => $user->skill()->latest()->get()]);
+        return view('resume.skills-cv-form', ['user'=>$user , 'skills' => $user->skill()->latest()->get()]);
     }
 
 
@@ -123,7 +125,7 @@ class UserController extends Controller
 
     // show the work experience form 
     public function showWorkExpCVForm(User $user){
-        return view('work-experience-cv-form', ['user'=>$user]);
+        return view('resume.work-experience-cv-form', ['user'=>$user]);
     }
 
     //set the work experience data to database
@@ -140,7 +142,7 @@ class UserController extends Controller
     
     // show the graduation form 
     public function showGraduationCVForm(User $user){
-        return view('graduation-cv-form', ['user'=>$user]);
+        return view('resume.graduation-cv-form', ['user'=>$user]);
     }
 
     // set the graduation form info to database
@@ -163,7 +165,7 @@ class UserController extends Controller
 
     // show the template for resume
     public function showTemplates(User $user){
-        return view('template-page', ['user'=>$user]);
+        return view('templates.template-page', ['user'=>$user]);
     }
 
 
@@ -178,7 +180,7 @@ class UserController extends Controller
         $user->wichTeplate = 1;
         $user->save();
 
-        return view('first-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
+        return view('templates.first-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
 
     }
 
@@ -193,7 +195,7 @@ class UserController extends Controller
         $user->wichTeplate = 2;
         $user->save();
 
-        return view('second-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
+        return view('templates.second-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
 
     }
 
@@ -208,7 +210,7 @@ class UserController extends Controller
         $user->wichTeplate = 3;
         $user->save();
 
-        return view('third-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
+        return view('templates.third-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
 
     }
 
@@ -223,7 +225,7 @@ class UserController extends Controller
         $user->wichTeplate = 4;
         $user->save();
 
-        return view('fourth-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
+        return view('templates.fourth-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
 
     }
 
@@ -248,12 +250,12 @@ class UserController extends Controller
 
     //show change setting list
     public function showProfilePage(User $user){
-        return view('profile-page', ["user"=>$user]);
+        return view('user.profile-page', ["user"=>$user]);
     }
 
     //change user info form
     public function showChangeUserInfo(User $user){
-        return view('change-user', ["user"=>$user]);
+        return view('changes.change-user', ["user"=>$user]);
     }
 
     //save user info changing
@@ -271,7 +273,7 @@ class UserController extends Controller
     //change personal info form
     public function showChangePersonalInfo(User $user){
         $personal = $user->personal;
-        return view ('change-personal', ["user"=>$user , 'personal' => $personal]);
+        return view ('changes.change-personal', ["user"=>$user , 'personal' => $personal]);
     }
 
     public function savePersonalChanging(Request $request, User $user){
@@ -291,7 +293,7 @@ class UserController extends Controller
     //show skill changing form
     public function showChangeSkillInfo(User $user){
         $skill = $user->skill()->latest()->get();
-        return view ('change-skill', ["user"=>$user , 'skills' => $skill]);
+        return view ('changes.change-skill', ["user"=>$user , 'skills' => $skill]);
     }
 
     //save skill information changing
@@ -302,14 +304,17 @@ class UserController extends Controller
         ]);
         $incomingFields['title'] = strip_tags($incomingFields['title']);
         $incomingFields['body'] = strip_tags($incomingFields['body']);
-        Skill::create($incomingFields);
+        $incomingFields['user_id'] = auth()->id();
+        $skill = Skill::create($incomingFields);
+        $skill->user_id = $user->id;
+        $skill->save();
         $id = $user->id;
         return redirect("/change-profile/$id");        
     }
     //show the graduation changeing page
     public function showChangeGraduationInfo(User $user){
         $graduation =  $user->graduation()->latest()->get();
-        return view ('change-graduation', ['user'=>$user , 'graduations' => $graduation]);
+        return view ('changes.change-graduation', ['user'=>$user , 'graduations' => $graduation]);
     }
 
     //save the graduation information
@@ -335,7 +340,7 @@ class UserController extends Controller
     //show the experience changig page
     public function showChangeExperienceInfo(User $user){
         $experience = $user->experience()->latest()->get();
-        return view ('change-experience', ["user"=>$user , 'experiences' => $experience]);
+        return view ('changes.change-experience', ["user"=>$user , 'experiences' => $experience]);
     }
 
 
@@ -352,11 +357,11 @@ class UserController extends Controller
 
     //show changing template form
     public function showChangeTemplateInfo(User $user){
-        return view('template-page' , ['user'=>$user]);
+        return view('templates.template-page' , ['user'=>$user]);
     }
 
     public function showChangePasswordInfo(User $user){
-        return view('change-password', ['user'=>$user]);
+        return view('changes.change-password', ['user'=>$user]);
     }
     //change the password and save in database
     public function savePasswordChanging(Request $request, User $user){
@@ -371,11 +376,55 @@ class UserController extends Controller
 
     //see the forget password page
     public function showForgetPassPage(User $user){
-        return view('froget-password' , ['user'=>$user]);
+        return view('forget.froget-password' , ['user'=>$user]);
     }
 
     public function changeTheForgetPassword(Request $request, User $user){
-        return 'hello';
+        $incomingFields = $request->validate([
+            'email'=>['required','email'],
+            'password'=>['required','min:6'],
+            'first_high_school_name'=>['required']
+
+         ]);
+         $email = DB::table('users')->select('email')->get();
+        
+         if($incomingFields['email'] == $email){
+            $first_high_school_name = DB::table('users')->where('email', $incomingFields['email'])->value('first_high_school_name');
+         }else{
+            return redirect('/')->with('failure' , 'You cannot change the password because you enter wrong data!');
+         }
+         if($first_high_school_name == $incomingFields['first_high_school_name']){
+            $incomingFields['password'] = bcrypt($incomingFields['password']);
+            User::where('first_high_school_name',$incomingFields['first_high_school_name'])->update($incomingFields);
+            return redirect('/')->with('message' , 'You changes the password successfully!');
+
+        }else{
+            return redirect('/')->with('failure' , 'You cannot change the password because you enter wrong data!');
+        }
+
     }
 
+    public function deleteSkills(Skill $skill , User $user){
+        $id = $user->id;
+        
+        if($user->cannot('delete' , $skill)){
+            return redirect("/create-cv-form/$id/skills")->with('failure','It cannot be deleted!');
+        }else{
+            $skill->delete();
+            return redirect("/create-cv-form/$id/skills")->with('message','The skill successfully deleted!');
+
+        }
+    }
+
+    public function destroySkill(Skill $skill , User $user){
+        $id = $user->id;
+        
+        if($user->cannot('delete' , $skill)){
+            return redirect("/create-cv-form/$id/skills")->with('failure','It cannot be deleted!');
+        }else{
+            $skill->delete();
+            return redirect("/create-cv-form/$id/skills")->with('message','The skill successfully deleted!');
+
+        }
+    }
 }
