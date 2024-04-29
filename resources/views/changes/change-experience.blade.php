@@ -71,6 +71,9 @@
           <div class="form-group">
             <label for="username-register" class="text-muted mb-1">Work Experience</label>
             <input value="{{$experience->body}}" name="body" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Name" autocomplete="off" />
+            @error('body')
+            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+            @enderror
           </div>   
           @endforeach
 

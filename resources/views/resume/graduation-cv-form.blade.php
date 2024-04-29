@@ -64,21 +64,33 @@
           <div class="form-group">
             <label for="username-register" class="text-muted mb-1">Graduation Level</label>
             <input name="level" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Graduation level" autocomplete="off" />
+            @error('level')
+            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+            @enderror
           </div>
 
           <div class="form-group">
             <label for="email-register" class="text-muted mb-1">What is your major in high school?</label>
             <input name="high_school_major" style="font-size: 13px" id="email-register" class="form-control" type="text" placeholder="Major in high school" autocomplete="off" />
+            @error('high_school_major')
+            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+            @enderror
           </div>
 
           <div class="form-group">
             <label for="password-register" class="text-muted mb-1">What is your major in university?(if you are studying now or studied)</label>
             <input name="university_major" style="font-size: 13px" id="password-register" class="form-control" type="text" placeholder="Major in university" min="0"/>
+            @error('university_major')
+            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+            @enderror
           </div>
 
           <div class="form-group">
             <label for="password-register" class="text-muted mb-1">What is(was) your university name?(if you are studying now or studied)</label>
             <input name="university_name" style="font-size: 13px" id="password-register" class="form-control" type="text" placeholder="University Name" min="0"/>
+            @error('university_name')
+            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+            @enderror
           </div>
 
 

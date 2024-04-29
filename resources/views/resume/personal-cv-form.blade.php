@@ -65,22 +65,34 @@
           <div class="form-group">
             <label for="username-register" class="text-muted mb-1">Name</label>
             <input name="name" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Name" autocomplete="off" />
+            @error('name')
+            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+            @enderror
           </div>
 
           <div class="form-group">
             <label for="email-register" class="text-muted mb-1">Family Name</label>
             <input name="familyName" style="font-size: 13px" id="email-register" class="form-control" type="text" placeholder="Family Name" autocomplete="off" />
+            @error('familyName')
+            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+            @enderror
           </div>
 
           <div class="form-group">
             <label for="password-register" class="text-muted mb-1">Age</label>
             <input name="age" style="font-size: 13px" id="password-register" class="form-control" type="number" placeholder="Age" min="0"/>
+            @error('age')
+            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+            @enderror
           </div>
 
           <div class="form-group">
             <div>
               <label for="password-register-confirm" class="text-muted mb-1">Gender</label>
             </div>
+            @error('gender')
+            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+            @enderror
             <input type="radio" id="age1" name="gender" value="male">
             <label for="gender" style="font-size: 13px">Male</label><br>
             <input type="radio" id="age2" name="gender" value="female">
@@ -91,6 +103,9 @@
           <div class="form-group">
               <label for="password-register-confirm" class="text-muted mb-1">Military</label>
             <input name="military" id="password-register-confirm" class="form-control" type="tex" placeholder="Military" />
+            @error('military')
+            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+            @enderror
           </div>
 
           <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Next</button>

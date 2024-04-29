@@ -76,11 +76,17 @@
           <div class="form-group">
             <label for="username-register" class="text-muted mb-1">Title</label>
             <input name="title" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Name" autocomplete="off" />
+            @error('title')
+            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+            @enderror
           </div>
 
           <div class="form-group">
             <label for="email-register" class="text-muted mb-1">Body</label>
             <input name="body" style="font-size: 13px" id="email-register" class="form-control" type="text" placeholder="Description" autocomplete="off" />
+            @error('body')
+            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+            @enderror
           </div>
 
 

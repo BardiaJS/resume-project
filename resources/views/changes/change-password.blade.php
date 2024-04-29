@@ -11,11 +11,17 @@
             <div class="form-group">
               <label for="username-register" class="text-muted mb-1"><small>Password</small></label>
               <input name="password" id="username-register" class="form-control" type="password" placeholder="Pick a password" autocomplete="off" />
+              @error('password')
+              <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+              @enderror
             </div>
 
             <div class="form-group">
               <label for="email-register" class="text-muted mb-1"><small>Password Confirmation</small></label>
               <input name="password_confirmation" id="email-register" class="form-control" type="password" placeholder="Confirm Password" autocomplete="off" />
+              @error('password_confirmation')
+              <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+              @enderror
             </div>
 
             

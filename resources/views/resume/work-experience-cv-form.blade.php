@@ -68,6 +68,9 @@
           <div class="form-group">
             <label for="username-register" class="text-muted mb-1">Work Experience</label>
             <input name="body" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Name" autocomplete="off" />
+            @error('body')
+            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+            @enderror
           </div>   
           <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Next</button>       
         </form>

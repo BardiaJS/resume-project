@@ -35,7 +35,6 @@ class UserController extends Controller
 
          ]);
          $incomingFields['password'] = bcrypt($incomingFields['password']);
-
          $user = User::create($incomingFields);
          auth()->login($user);
          return redirect('/')->with('message','You created an account successfully!');
@@ -58,7 +57,6 @@ class UserController extends Controller
             'email' => ['required','email'],
             'password'=> 'required'
         ]);
-        
         if(auth()->attempt($incomingFields)){
             $request->session()->regenerate();
             return redirect('/')->with('message' , 'You are logged in successfully');

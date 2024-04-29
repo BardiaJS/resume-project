@@ -22,10 +22,10 @@ Route::post('/register-user', [UserController::class,'registerUser'])->middlewar
 Route::post('/signout-user', [UserController::class,'signoutUser'])->middleware('auth');
 
 //log in the user
-Route::get('/login-form', [UserController::class,'loginUserForm'])->name('guest');
+Route::get('/login-form', [UserController::class,'loginUserForm'])->middleware('guest');
 
 //logging in the user
-Route::post('/login-user', [UserController::class,'loginUser'])->middleware('auth');
+Route::post('/login-user', [UserController::class,'loginUser'])->middleware('guest');
 
 //showing personal data createCV form
 Route::get('/create-cv-form/{user}/personal', [UserController::class,'showPersonalCVForm'])->middleware('auth');
