@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -51,57 +50,58 @@
     </header>
     <!-- header ends here -->
 
-    @if (session()->has('message'))
-    <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show" class="container container-narrow">
-      <div class="alert text-center" style="background-color: #16a085">
-        {{session('message')}}
-      </div>
-    </div>
-  @endif
-  <div class="container py-md-5">
-    <div class="row align-items-center">
-      <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5" style="text-align: center">
-
-        <form action="/create-cv-form/{{$user->id}}/edit/experience/save" method="POST" id="registration-form">
-          @csrf
-          @method('POST')
-          @foreach ($experiences as $experience)
-              
-          <div class="form-group" style="text-align: center">
-            Enter some information about your work experience
-          </div>
-          <div class="form-group">
-            <label for="username-register" class="text-muted mb-1">Work Experience</label>
-            <input value="{{$experience->body}}" name="body" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Name" autocomplete="off" />
-            @error('body')
-            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
-            @enderror
-          </div>   
-          @endforeach
-
-          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">save changes</button>       
-        </form>
 
 
+    <form action="/edit/{{$skill->id}}/{{$user->id}}/change/save" method="POST" id="registration-form">
+        @csrf
+        <div class="form-group" style="text-align: center">
+          Edit your skill
+        </div>
+        <div class="form-group">
+          <label for="username-register" class="text-muted mb-1">Title</label>
+          <input name="title" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Name" autocomplete="off" value="{{$skill->title}}" />
+          @error('title')
+          <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+          @enderror
+        </div>
+
+        <div class="form-group">
+          <label for="email-register" class="text-muted mb-1">Body</label>
+          <input name="body" style="font-size: 13px" id="email-register" class="form-control" type="text" placeholder="Description" autocomplete="off" value="{{$skill->body}}"/>
+          @error('body')
+          <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+          @enderror
+        </div>
+
+
+
+        <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Save Changes</button>
 
         
-      </div>
-    </div>
-  </div>
-    <!-- footer begins -->
-    <footer class="border-top text-center small text-muted py-3">
-      <p class="m-0">Copyright &copy; {{date('Y')}} <a href="/" class="text-muted">OurApp</a>. All rights reserved.</p>
-    </footer>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script>
-      $('[data-toggle="tooltip"]').tooltip()
-    </script>
-  </body>
-</html>
+      </form>
 
 
 
+
+
+
+
+
+
+
+
+     <!-- footer begins -->
+     <footer class="border-top text-center small text-muted py-3">
+        <p class="m-0">Copyright &copy; {{date('Y')}} <a href="/" class="text-muted">OurApp</a>. All rights reserved.</p>
+      </footer>
+  
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      <script>
+        $('[data-toggle="tooltip"]').tooltip()
+      </script>
+    </body>
+  </html>
+  
   

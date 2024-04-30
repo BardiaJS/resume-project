@@ -377,6 +377,8 @@ class UserController extends Controller
         return view('forget.froget-password' , ['user'=>$user]);
     }
 
+    //change the password
+
     public function changeTheForgetPassword(Request $request, User $user){
         $incomingFields = $request->validate([
             'email'=>['required','email'],
@@ -401,6 +403,7 @@ class UserController extends Controller
         }
 
     }
+    //show for for deleting the skill
 
     public function deleteSkills(Skill $skill , User $user){
         $id = $user->id;
@@ -414,7 +417,8 @@ class UserController extends Controller
         }
     }
 
-    public function destroySkill(Skill $skill , User $user){
+    //deleting skills
+    public function deleteSkillsChange(Skill $skill , User $user){
         $id = $user->id;
         
         if($user->cannot('delete' , $skill)){
@@ -425,4 +429,44 @@ class UserController extends Controller
 
         }
     }
+
+
+    //edit form for skills
+    public function updateSkillsForm(Skill $skill , User $user){
+        return view ('changes.edit-skill-page' , ['skill'=> $skill ,'user'=> $user ]);
+    }
+
+    //save edit skills
+    public function saveUpdateSkills(Request $request, Skill $skill , User $user){
+        $request['level'] = strip_tags($request['level']);
+        $request['high_school_major'] = strip_tags($request['high_school_major']);
+        $id = $user->id;
+        if($skill){
+            $skill->title = $request->title;
+            $skill->body = $request->body;
+            $skill->save();
+            return redirect("/create-cv-form/$id/skills")->with('message','Congrats! you edited the skill successfully!') ; 
+        }else{
+            return redirect("/create-cv-form/$id/skills")->with('failure','You cannot edit the skill!') ; 
+
+        }
+    }
+    public function updateSkillsFormCahnge(Skill $skill , User $user){
+        return view ('changes.edit-skill-page-change-skill' , ['skill'=> $skill ,'user'=> $user ]);
+    }
+    public function saveUpdateSkillsChange(Request $request, Skill $skill , User $user){
+        $request['level'] = strip_tags($request['level']);
+        $request['high_school_major'] = strip_tags($request['high_school_major']);
+        $id = $user->id;
+        if($skill){
+            $skill->title = $request->title;
+            $skill->body = $request->body;
+            $skill->save();
+            return redirect("/create-cv-form/$id/edit/skill")->with('message','Congrats! you edited the skill successfully!') ; 
+        }else{
+            return redirect("/create-cv-form/$id/edit/skill")->with('failure','You cannot edit the skill!'); 
+
+        }
+    }
+   
 }

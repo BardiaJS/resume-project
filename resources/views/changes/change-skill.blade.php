@@ -18,6 +18,8 @@
     <header class="header-bar mb-3">
       <div class="container d-flex flex-column flex-md-row align-items-center p-3">
         <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">OurApp</a></h4>
+        <a href="/" style="text-decoration:none; color:black; margin-left:0%"><img width="24" height="24" src="https://img.icons8.com/material-rounded/24/back--v1.png"/>Back</a>
+
         
           @auth
           <div class="flex-row my-3 my-md-0">
@@ -85,10 +87,10 @@
 
           <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Confirm</button>
 
-          
+
         </form>
 
-        <form action="/change-profile/{{$user->id}}" method="POST" id="registration-form">
+        <form action="/change-profile/{{auth()->user()->id}}" method="get" id="registration-form">
           @csrf
           <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">save changes</button>
         </form>
@@ -107,13 +109,19 @@
         <p>{{$skill->title}}</p>
         <p style="color: green">{{$skill->body}}</p>
         @can('update' , $skill)
-        <form action="/delete/{{$skill->id}}/{{$users->id}}/change" method="POST" id="registration-form">
+        <form action="/delete/{{$skill->id}}/{{auth()->user()->id}}/change" method="POST" id="registration-form">
           @csrf
           @method('DELETE')
           <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">delete</button>
 
         </form>
         @endcan
+                  @can('update' , $skill)
+          <form action="/edit/{{$skill->id}}/{{auth()->user()->id}}/change" method="GET" id="registration-form">
+            <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">edit</button>
+          </form>
+          
+          @endcan
         </div>
       </div>
       @endforeach

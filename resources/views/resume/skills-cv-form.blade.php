@@ -121,8 +121,15 @@
             @csrf
             @method('DELETE')
             <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">delete</button>
-
           </form>
+
+          @endcan
+
+          @can('update' , $skill)
+          <form action="/edit/{{$skill->id}}/{{$user->id}}" method="GET" id="registration-form">
+            <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">edit</button>
+          </form>
+          
           @endcan
           </div>
         </div>

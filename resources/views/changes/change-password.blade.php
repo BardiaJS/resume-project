@@ -1,5 +1,6 @@
 
 <x-layout>
+  <a href="/" style="text-decoration:none; color:black; margin-left:0%"><img width="24" height="24" src="https://img.icons8.com/material-rounded/24/back--v1.png"/>Back</a>
     <div class="container py-md-5">
       <div class="col-3"></div>
         <div class="col-6">

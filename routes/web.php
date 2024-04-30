@@ -123,7 +123,18 @@ Route::delete('/delete/{skill}/{user}', [UserController::class,'deleteSkills'])-
 //delete in chang mode skills
 Route::delete('/delete/{skill}/{users}/change', [UserController::class,'deleteSkillsChange'])->middleware('auth');
 
+//edit skills form
+Route::get('/edit/{skill}/{user}', [UserController::class,'updateSkillsForm'])->middleware('auth');
 
+//save edit skills
+Route::post('/edit/{skill}/{user}/save', [UserController::class,'saveUpdateSkills'])->middleware('auth');
+
+
+//edit skills in change mode form
+Route::get('/edit/{skill}/{user}/change', [UserController::class,'updateSkillsFormCahnge'])->middleware('auth');
+
+//save edit in change mode skills
+Route::post('/edit/{skill}/{user}/change/save', [UserController::class,'saveUpdateSkillsChange'])->middleware('auth');
 
 
 
