@@ -1,11 +1,8 @@
 
 <x-layout>
     <div class="container py-md-5">
-      <div class="row align-items-center">
-        <div class="col-lg-7 py-3 py-md-5">
-          
-        </div>
-        <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5">
+      <div class="col-3"></div>
+        <div class="col-6">
           <form action="/create-cv-form/{{$user->id}}/edit/password/save" method="POST" id="registration-form">
             @csrf
             <div class="form-group">
@@ -29,7 +26,7 @@
             <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">change user settings</button>
           </form>
         </div>
-      </div>
+      
     </div>
 </x-layout>
 
