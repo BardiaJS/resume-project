@@ -13,6 +13,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/main.css" />
     <script src="//unpkg.com/alpinejs" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </head>
   <body>
     <header class="header-bar mb-3">
@@ -64,10 +66,9 @@
     </div>
   </div>
 @endif
-  <div class="container py-md-5">
-    <div class="row align-items-center">
-      <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5" style="text-align: center">
-
+<div class="row">
+  <div class="col-3" style="text-align: center"></div>
+    <div class="col-6" style="text-align: center">
         <form action="/create-cv-form/{{$user->id}}/skills/information" method="POST" id="registration-form">
           @csrf
           <div class="form-group" style="text-align: center">
@@ -96,38 +97,35 @@
           
         </form>
 
-        <form action="/create-cv-form/{{$user->id}}/work-experience" method="POST" id="registration-form">
+        <form action="/create-cv-form/{{$user->id}}/work-experience" method="GET" id="registration-form">
           @csrf
           <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Next</button>
         </form>
-
-        
-      </div>
     </div>
-  </div>
-  <div>
-   
+    <div class="col-3"></div>   
+</div>
+    
       @foreach ($skills as $skill)
       
 
         <div>
             
          
-          <div class="" style="border: 1px solid black; text-align:center">
+          <div class="" style="border: 1px solid black; text-align:center; margin-top:30px">
           <p>{{$skill->title}}</p>
           <p style="color: green">{{$skill->body}}</p>
           @can('update' , $skill)
           <form action="/delete/{{$skill->id}}/{{$user->id}}" method="POST" id="registration-form">
             @csrf
             @method('DELETE')
-            <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">delete</button>
+            <button type="submit"  style="width:100px; height:30px; text-align:center; background-color:#e4bdbd">delete</button>
           </form>
 
           @endcan
 
           @can('update' , $skill)
           <form action="/edit/{{$skill->id}}/{{$user->id}}" method="GET" id="registration-form">
-            <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">edit</button>
+            <button type="submit" style="width:100px; height:30px; text-align:center; margin-top:10px; background-color:#e4bdbd">edit</button>
           </form>
           
           @endcan

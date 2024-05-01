@@ -55,11 +55,19 @@
       </div>
     </div>
   @endif
+
+  @if (session()->has('failure'))
+  <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show" class="container container-narrow">
+    <div class="alert text-center" style="background-color: #e60000">
+      {{session('failure')}}
+    </div>
+  </div>
+@endif
   <div class="container py-md-5">
     <div class="row align-items-center">
-      <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5">
-
-        <form action="/create-cv-form/{{$user->id}}/graduation/information" method="POST" id="registration-form">
+      <div class="col-3"></div>
+      <div class="col-6">
+        <form action="/create-cv-form/{{auth()->user()->id}}/graduation/information" method="POST" id="registration-form">
           @csrf
           <div class="form-group">
             <label for="username-register" class="text-muted mb-1">Graduation Level</label>
@@ -92,13 +100,48 @@
             <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
             @enderror
           </div>
-
-
+          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">confirm</button>
+        </form>
+        <form action="/choose-template/{{$user->id}}/resume" method="GET" id="registration-form">
           <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">finish</button>
         </form>
       </div>
+      <div class="col-3"></div>
     </div>
   </div>
+
+
+
+  @foreach ($graduations as $graduation)
+      
+
+  <div>
+      
+   
+    <div class="" style="border: 1px solid black; text-align:center; margin-top:30px">
+    <p style="font-weight: bold"><span style="color:green">{{$graduation->level}}</span> </p>
+    <p style="font-weight: bold"><span style="color:green">{{$graduation->high_school_major}}</span></p>
+    <p style="font-weight: bold"><span style="color:green">{{$graduation->university_major}}</span></p>
+    <p style="font-weight: bold"><span style="color:green">{{$graduation->university_name}}</span></p>
+
+    @can('update' , $graduation)
+    <form action="/delete/{{$graduation->id}}/{{auth()->user()->id}}" method="POST" id="registration-form">
+      @csrf
+      @method('DELETE')
+      <button type="submit"  style="width:100px; height:30px; text-align:center; background-color:#e4bdbd">delete</button>
+    </form>
+
+    @endcan
+
+    @can('update' , $graduation)
+    <form action="/edit/{{$graduation->id}}/{{$user->id}}" method="GET" id="registration-form">
+      <button type="submit" style="width:100px; height:30px; text-align:center; margin-top:10px; background-color:#e4bdbd">edit</button>
+    </form>
+    
+    @endcan
+    </div>
+  </div>
+@endforeach
     <!-- footer begins -->
     <footer class="border-top text-center small text-muted py-3">
       <p class="m-0">Copyright &copy; {{date('Y')}} <a href="/" class="text-muted">OurApp</a>. All rights reserved.</p>

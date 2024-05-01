@@ -4,7 +4,7 @@
       <div class="row align-items-center">
         <div class="col-lg-7 py-3 py-md-5">
           <h1 class="display-3">Haven't you make your CV yet??</h1>
-          <p class="lead text-muted">Are you sick of short tweets and impersonal &ldquo;shared&rdquo; posts that are reminiscent of the late 90&rsquo;s email forwards? We believe getting back to actually writing is the key to enjoying the internet again.</p>
+          <p class="lead text-muted">You can make your CV here &ldquo;shared&rdquo; posts that are reminiscent of the late 90&rsquo;s You can do it here!</p>
         </div>
         <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5">
           <form action="/register-user" method="POST" id="registration-form">

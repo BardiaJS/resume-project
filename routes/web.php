@@ -40,7 +40,7 @@ Route::get('/create-cv-form/{user}/skills', [UserController::class,'showSkillsCV
 Route::post('/create-cv-form/{user}/skills/information', [UserController::class,'getSkillCV'])->middleware('auth');
 
 // showing the experience form
-Route::post('/create-cv-form/{user}/work-experience', [UserController::class,'showWorkExpCVForm'])->middleware('auth');
+Route::get('/create-cv-form/{user}/work-experience', [UserController::class,'showWorkExpCVForm'])->middleware('auth');
 
 //save experience info and go next step
 Route::post('/create-cv-form/{user}/work-experience/information', [UserController::class,'getWorkExpCV'])->middleware('auth');
@@ -120,7 +120,7 @@ Route::post('/forget-password/save', [UserController::class,'changeTheForgetPass
 //delete skills
 Route::delete('/delete/{skill}/{user}', [UserController::class,'deleteSkills'])->middleware('auth');
 
-//delete in chang mode skills
+//delete in change mode skills
 Route::delete('/delete/{skill}/{users}/change', [UserController::class,'deleteSkillsChange'])->middleware('auth');
 
 //edit skills form
@@ -139,7 +139,24 @@ Route::post('/edit/{skill}/{user}/change/save', [UserController::class,'saveUpda
 
 
 
+//delete graduations
+Route::delete('/delete/{graduation}/{user}', [UserController::class,'deleteGraduation'])->middleware('auth');
 
+//delete in chang mode graduations
+Route::delete('/delete/{graduation}/{user}/change', [UserController::class,'deleteGraduationChange'])->middleware('auth');
+
+//edit graduation form
+Route::get('/edit/{skill}/{user}', [UserController::class,'updateSkillsForm'])->middleware('auth');
+
+//save graduation skills
+Route::post('/edit/{skill}/{user}/save', [UserController::class,'saveUpdateSkills'])->middleware('auth');
+
+
+//edit graduation in change mode form
+Route::get('/edit/{skill}/{user}/change', [UserController::class,'updateSkillsFormCahnge'])->middleware('auth');
+
+//save edit in change mode graduation
+Route::post('/edit/{skill}/{user}/change/save', [UserController::class,'saveUpdateSkillsChange'])->middleware('auth');
 
 
 

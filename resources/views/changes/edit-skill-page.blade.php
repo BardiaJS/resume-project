@@ -17,7 +17,6 @@
     <header class="header-bar mb-3">
       <div class="container d-flex flex-column flex-md-row align-items-center p-3">
         <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">OurApp</a></h4>
-        <a href="/" style="text-decoration:none; color:black; margin-left:0%"><img width="24" height="24" src="https://img.icons8.com/material-rounded/24/back--v1.png"/>Back</a>
         
           @auth
           <div class="flex-row my-3 my-md-0">
@@ -48,36 +47,57 @@
       </div>
     </header>
     <!-- header ends here -->
+    @if (session()->has('message'))
+    <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show" class="container container-narrow">
+      <div class="alert text-center" style="background-color: #16a085">
+        {{session('message')}}
+      </div>
+    </div>
+  @endif
+
+  @if (session()->has('failure'))
+  <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show" class="container container-narrow">
+    <div class="alert text-center" style="background-color: #e60000">
+      {{session('failure')}}
+    </div>
+  </div>
+@endif
 
 
-
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
     <form action="/edit/{{$skill->id}}/{{$user->id}}/save" method="POST" id="registration-form">
-        @csrf
-        <div class="form-group" style="text-align: center">
-          Edit your skill
-        </div>
-        <div class="form-group">
-          <label for="username-register" class="text-muted mb-1">Title</label>
-          <input name="title" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Name" autocomplete="off" value="{{$skill->title}}" />
-          @error('title')
-          <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
-          @enderror
-        </div>
+      @csrf
+      <div class="form-group" style="text-align: center">
+        Edit your skill
+      </div>
+      <div class="form-group">
+        <label for="username-register" class="text-muted mb-1">Title</label>
+        <input name="title" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Name" autocomplete="off" value="{{$skill->title}}" />
+        @error('title')
+        <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+        @enderror
+      </div>
 
-        <div class="form-group">
-          <label for="email-register" class="text-muted mb-1">Body</label>
-          <input name="body" style="font-size: 13px" id="email-register" class="form-control" type="text" placeholder="Description" autocomplete="off" value="{{$skill->body}}"/>
-          @error('body')
-          <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
-          @enderror
-        </div>
+      <div class="form-group">
+        <label for="email-register" class="text-muted mb-1">Body</label>
+        <input name="body" style="font-size: 13px" id="email-register" class="form-control" type="text" placeholder="Description" autocomplete="off" value="{{$skill->body}}"/>
+        @error('body')
+        <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+        @enderror
+      </div>
 
 
 
-        <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Save Changes</button>
+      <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Save Changes</button>
 
-        
-      </form>
+      
+    </form>
+  </div>
+  <div class="col-3"></div>
+</div>
+    
 
 
 

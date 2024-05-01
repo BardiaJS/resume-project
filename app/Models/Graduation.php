@@ -9,7 +9,7 @@ class Graduation extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'body',
+        'level',
         'high_school_major',
         'university_major',
         'university_name',
