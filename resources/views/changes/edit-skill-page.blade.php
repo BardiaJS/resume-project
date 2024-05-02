@@ -67,7 +67,7 @@
 <div class="row">
   <div class="col-3"></div>
   <div class="col-6">
-    <form action="/edit/{{$skill->id}}/{{$user->id}}/save" method="POST" id="registration-form">
+    <form action="/edit-skill/{{$skill->id}}/{{$user->id}}/save" method="POST" id="registration-form">
       @csrf
       <div class="form-group" style="text-align: center">
         Edit your skill

@@ -47,7 +47,6 @@
       </div>
     </header>
     <!-- header ends here -->
-
     @if (session()->has('message'))
     <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show" class="container container-narrow">
       <div class="alert text-center" style="background-color: #16a085">
@@ -63,99 +62,50 @@
     </div>
   </div>
 @endif
-  <div class="container py-md-5">
-    <div class="row align-items-center">
-      <div class="col-3"></div>
-      <div class="col-6">
-        <form action="/create-cv-form/{{auth()->user()->id}}/graduation/information" method="POST" id="registration-form">
-          @csrf
-          <div class="form-group">
-            <label for="username-register" class="text-muted mb-1">Graduation Level</label>
-            <input name="level" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Graduation level" autocomplete="off" />
-            @error('level')
-            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
-            @enderror
-          </div>
-
-          <div class="form-group">
-            <label for="email-register" class="text-muted mb-1">What is your major in high school?</label>
-            <input name="high_school_major" style="font-size: 13px" id="email-register" class="form-control" type="text" placeholder="Major in high school" autocomplete="off" />
-            @error('high_school_major')
-            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
-            @enderror
-          </div>
-
-          <div class="form-group">
-            <label for="password-register" class="text-muted mb-1">What is your major in university?(if you are studying now or studied)</label>
-            <input name="university_major" style="font-size: 13px" id="password-register" class="form-control" type="text" placeholder="Major in university" min="0"/>
-            @error('university_major')
-            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
-            @enderror
-          </div>
-
-          <div class="form-group">
-            <label for="password-register" class="text-muted mb-1">What is(was) your university name?(if you are studying now or studied)</label>
-            <input name="university_name" style="font-size: 13px" id="password-register" class="form-control" type="text" placeholder="University Name" min="0"/>
-            @error('university_name')
-            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
-            @enderror
-          </div>
-          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">confirm</button>
-        </form>
-        <form action="/choose-template/{{$user->id}}/resume" method="GET" id="registration-form">
-          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">finish</button>
-        </form>
-      </div>
-      <div class="col-3"></div>
-    </div>
-  </div>
 
 
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
 
-  @foreach ($graduations as $graduation)
-      
-
-  <div>
-      
-   
-    <div class="" style="border: 1px solid black; text-align:center; margin-top:30px">
-    <p style="font-weight: bold"><span style="color:green">{{$graduation->level}}</span> </p>
-    <p style="font-weight: bold"><span style="color:green">{{$graduation->high_school_major}}</span></p>
-    <p style="font-weight: bold"><span style="color:green">{{$graduation->university_major}}</span></p>
-    <p style="font-weight: bold"><span style="color:green">{{$graduation->university_name}}</span></p>
-
-    @can('update' , $graduation)
-    <form action="/delete-graduation/{{$graduation->id}}/{{auth()->user()->id}}" method="POST" id="registration-form">
+    <form action="/edit-graduation/{{$graduation->id}}/{{$user->id}}/save" method="POST" id="registration-form">
       @csrf
-      @method('DELETE')
-      <button type="submit"  style="width:100px; height:30px; text-align:center; background-color:#e4bdbd">delete</button>
-    </form>
 
-    @endcan
+      <div class="form-group">
+        <label for="username-register" class="text-muted mb-1">Graduation Level</label>
+        <input value="{{$graduation->level}}" name="level" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Graduation level" autocomplete="off" />
+        @error('level')
+        <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+        @enderror
+      </div>
 
-    @can('update' , $graduation)
-    <form action="/edit-graduation/{{$graduation->id}}/{{auth()->user()->id}}" method="GET" id="registration-form">
-      <button type="submit" style="width:100px; height:30px; text-align:center; margin-top:10px; background-color:#e4bdbd">edit</button>
+      <div class="form-group">
+        <label for="email-register" class="text-muted mb-1">What is your major in high school?</label>
+        <input value="{{$graduation->high_school_major}}"  name="high_school_major" style="font-size: 13px" id="email-register" class="form-control" type="text" placeholder="Major in high school" autocomplete="off" />
+        @error('high_school_major')
+        <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+        @enderror
+      </div>
+
+      <div class="form-group">
+        <label for="password-register" class="text-muted mb-1">What is your major in university?(if you are studying now or studied)</label>
+        <input value="{{$graduation->university_major}}" name="university_major" style="font-size: 13px" id="password-register" class="form-control" type="text" placeholder="Major in university" min="0"/>
+        @error('university_major')
+        <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+        @enderror
+      </div>
+
+      <div class="form-group">
+        <label for="password-register" class="text-muted mb-1">What is(was) your university name?(if you are studying now or studied)</label>
+        <input value="{{$graduation->university_name}}" name="university_name" style="font-size: 13px" id="password-register" class="form-control" type="text" placeholder="University Name" min="0"/>
+        @error('university_name')
+        <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+        @enderror
+      </div>
+      <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">confirm</button>
     </form>
-    
-    @endcan
-    </div>
   </div>
-@endforeach
-    <!-- footer begins -->
-    <footer class="border-top text-center small text-muted py-3">
-      <p class="m-0">Copyright &copy; {{date('Y')}} <a href="/" class="text-muted">OurApp</a>. All rights reserved.</p>
-    </footer>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script>
-      $('[data-toggle="tooltip"]').tooltip()
-    </script>
-  </body>
-</html>
-
-
+  <div class="col-3"></div>
+</div>
 
   

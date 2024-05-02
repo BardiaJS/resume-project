@@ -18,7 +18,7 @@
       <div class="container d-flex flex-column flex-md-row align-items-center p-3">
         <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">OurApp</a></h4>
 
-        
+        hellllllllllllllo
           @auth
           <div class="flex-row my-3 my-md-0">
             @if (auth()->user()->isCreateCV == 1)
@@ -69,7 +69,7 @@
       <div class="col-3"></div>
       <div class="col-6">
 
-        <form action="/create-cv-form/{{$user->id}}/edit/graduation/add/save" method="POST" id="registration-form">
+        <form action="/create-cv-form/{{$user->id}}/edit/graduation/save" method="POST" id="registration-form">
           @csrf
           @method('POST')
           
@@ -136,7 +136,7 @@
       <p style="font-weight: bold">University Major:<span style="color: #16a085"> {{$graduation->university_major}}</span></p>
       <p style="font-weight: bold">University Name: <span style="color: #16a085">{{$graduation->university_name}}</span></p>
       @can('update' , $graduation)
-      <form action="#" method="POST" id="registration-form">
+      <form action="/delete-graduation/{{$graduation->id}}/{{auth()->user()->id}}/change" method="POST" id="registration-form">
         @csrf
         @method('DELETE')
         <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">delete</button>
@@ -144,7 +144,7 @@
       </form>
       @endcan
                 @can('update' , $graduation)
-        <form action="/create-cv-form/{{$user->id}}/edit/graduation/save" method="GET" id="registration-form">
+        <form action="/edit-graduation/{{$graduation->id}}/{{auth()->user()->id}}/change" method="GET" id="registration-form">
           <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">edit</button>
         </form>
         

@@ -437,9 +437,9 @@ class UserController extends Controller
             $incomingFields['university_major'] = "None";
             $incomingFields['university_name'] = "None";
             $incomingFields['user_id'] = auth()->id();
-            Graduation::where('user_id',$user->id)->update($incomingFields);
+            Graduation::create($incomingFields);
             $id = $user->id;
-            return redirect("/change-profile/$id");
+            return redirect("/create-cv-form/$id/edit/graduation")->with('message' ,'Completed!');
         }
 
         //
@@ -453,9 +453,9 @@ class UserController extends Controller
             $incomingFields['university_major'] = "None";
             $incomingFields['university_name'] = "None";
             $incomingFields['user_id'] = auth()->id();
-            Graduation::where('user_id',$user->id)->update($incomingFields);
+            Graduation::create($incomingFields);
             $id = $user->id;
-            return redirect("/change-profile/$id");
+            return redirect("/create-cv-form/$id/edit/graduation")->with('message' ,'Completed!');
         }
 
 //
@@ -470,9 +470,9 @@ class UserController extends Controller
             $incomingFields['high_school_major'] =  "None";
             $incomingFields['university_name'] = "None";
             $incomingFields['user_id'] = auth()->id();
-            Graduation::where('user_id',$user->id)->update($incomingFields);
+            Graduation::create($incomingFields);
             $id = $user->id;
-        return redirect("/change-profile/$id");
+            return redirect("/create-cv-form/$id/edit/graduation")->with('message' ,'Completed!');
         }
 
 
@@ -490,7 +490,7 @@ class UserController extends Controller
             $incomingFields['user_id'] = auth()->id();
             Graduation::create($incomingFields);
             $id = $user->id;
-            return redirect("/change-profile/$id")->with('message','Your graduation data have been saved!');
+            return redirect("/create-cv-form/$id/edit/graduation")->with('message' ,'Completed!');
         }if ($request['university_major']){
             $incomingFields = $request->validate([
                 'level'=>'required|string',
@@ -505,7 +505,7 @@ class UserController extends Controller
             $incomingFields['user_id'] = auth()->id();
             Graduation::create($incomingFields);
             $id = $user->id;
-            return redirect("/choose-template/$id/resume")->with('message','Your graduation data have been saved!');
+            return redirect("/create-cv-form/$id/edit/graduation")->with('message' ,'Completed!');
         }if(empty($request['university_name'])){
             $incomingFields = $request->validate([
                 'level'=>'required|string',
@@ -520,7 +520,7 @@ class UserController extends Controller
             $incomingFields['user_id'] = auth()->id();
             Graduation::create($incomingFields);
             $id = $user->id;
-            return redirect("/change-profile/$id")->with('message','Your graduation data have been saved!');
+            return redirect("/create-cv-form/$id/edit/graduation")->with('message' ,'Completed!');
         }
         
 
@@ -537,7 +537,7 @@ class UserController extends Controller
         $incomingFields['user_id'] = auth()->id();
         Graduation::create($incomingFields);
         $id = $user->id;
-        return redirect("/change-profile/$id")->with('message','Your graduation data have been saved!');
+        return redirect("/create-cv-form/$id/edit/graduation")->with('message' ,'Completed!');
 
 
 
@@ -566,9 +566,6 @@ class UserController extends Controller
 
 
 
-        Graduation::where('user_id',$user->id)->update($incomingFields);
-        $id = $user->id;
-        return redirect("/change-profile/$id");
 
     }
 
@@ -765,7 +762,7 @@ class UserController extends Controller
 
     //edit form for skills
     public function updateGraduationForm(Graduation $graduation , User $user){
-        return view ('changes.edit-graduation-page' , ['graduations'=> $graduation ,'user'=> $user ]);
+        return view ('changes.edit-graduation-page' , ['graduation'=> $graduation ,'user'=> $user ]);
     }
 
     //save edit skills
@@ -921,7 +918,7 @@ class UserController extends Controller
 
     //edit skills in change mode
     public function updateGraduationFormCahnge(Graduation $graduation , User $user){
-        return view ('changes.edit-skill-page-change-skill' , ['skill'=> $graduation ,'user'=> $user ]);
+        return view ('changes.edit-graduation-page-change-graduation' , ['graduation'=> $graduation ,'user'=> $user ]);
     }
     //save edit skills in change mode
     public function saveUpdateGraduationChange(Request $request, Graduation $graduation , User $user){
@@ -941,7 +938,7 @@ class UserController extends Controller
             $incomingFields['user_id'] = auth()->id();
             if($graduation){
                 $graduation->update($incomingFields);
-                            return redirect("/create-cv-form/$id/edit/graduation")->with('message','Congrats! you edited the graduation successfully!') ; 
+                return redirect("/create-cv-form/$id/edit/graduation")->with('message','Congrats! you edited the graduation successfully!') ; 
 
             }else{
                  return redirect("/create-cv-form/$id/edit/graduation")->with('failure','You cannot edit the graduation!'); 

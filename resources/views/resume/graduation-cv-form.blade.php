@@ -113,7 +113,6 @@
 
 
   @foreach ($graduations as $graduation)
-      
 
   <div>
       

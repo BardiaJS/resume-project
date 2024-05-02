@@ -17,7 +17,7 @@
     <header class="header-bar mb-3">
       <div class="container d-flex flex-column flex-md-row align-items-center p-3">
         <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">OurApp</a></h4>
-        edit change
+        
           @auth
           <div class="flex-row my-3 my-md-0">
             @if (auth()->user()->isCreateCV == 1)
@@ -47,7 +47,6 @@
       </div>
     </header>
     <!-- header ends here -->
-
     @if (session()->has('message'))
     <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show" class="container container-narrow">
       <div class="alert text-center" style="background-color: #16a085">
@@ -64,46 +63,49 @@
   </div>
 @endif
 
-<div class="container py-md-5">
-    <div class="row align-items-center">
-      <div class="col-3"></div>
-      <div class="col-6">
-        <form action="/edit-graduation/{{$graduation->id}}/{{auth()->user()->id}}/save" method="POST" id="registration-form">
-          @csrf
-          <div class="form-group">
-            <label for="username-register" class="text-muted mb-1">Graduation Level</label>
-            <input value="{{$graduation->level}}" name="level" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Graduation level" autocomplete="off" />
-            @error('level')
-            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
-            @enderror
-          </div>
 
-          <div class="form-group">
-            <label for="email-register" class="text-muted mb-1">What is your major in high school?</label>
-            <input value="{{$graduation->high_school_major}}" name="high_school_major" style="font-size: 13px" id="email-register" class="form-control" type="text" placeholder="Major in high school" autocomplete="off" />
-            @error('high_school_major')
-            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
-            @enderror
-          </div>
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
 
-          <div class="form-group">
-            <label for="password-register" class="text-muted mb-1">What is your major in university?(if you are studying now or studied)</label>
-            <input value="{{$graduation->university_major}}" name="university_major" style="font-size: 13px" id="password-register" class="form-control" type="text" placeholder="Major in university" min="0"/>
-            @error('university_major')
-            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
-            @enderror
-          </div>
+    <form action="/edit-graduation/{{$graduation->id}}/{{$user->id}}/change/save" method="POST" id="registration-form">
+      @csrf
 
-          <div class="form-group">
-            <label for="password-register" class="text-muted mb-1">What is(was) your university name?(if you are studying now or studied)</label>
-            <input value="{{$graduation->university_name}}" name="university_name" style="font-size: 13px" id="password-register" class="form-control" type="text" placeholder="University Name" min="0"/>
-            @error('university_name')
-            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
-            @enderror
-          </div>
-          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">save changes</button>
-        </form>
+      <div class="form-group">
+        <label for="username-register" class="text-muted mb-1">Graduation Level</label>
+        <input value="{{$graduation->level}}" name="level" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Graduation level" autocomplete="off" />
+        @error('level')
+        <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+        @enderror
       </div>
-      <div class="col-3"></div>
-    </div>
+
+      <div class="form-group">
+        <label for="email-register" class="text-muted mb-1">What is your major in high school?</label>
+        <input value="{{$graduation->high_school_major}}"  name="high_school_major" style="font-size: 13px" id="email-register" class="form-control" type="text" placeholder="Major in high school" autocomplete="off" />
+        @error('high_school_major')
+        <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+        @enderror
+      </div>
+
+      <div class="form-group">
+        <label for="password-register" class="text-muted mb-1">What is your major in university?(if you are studying now or studied)</label>
+        <input value="{{$graduation->university_major}}" name="university_major" style="font-size: 13px" id="password-register" class="form-control" type="text" placeholder="Major in university" min="0"/>
+        @error('university_major')
+        <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+        @enderror
+      </div>
+
+      <div class="form-group">
+        <label for="password-register" class="text-muted mb-1">What is(was) your university name?(if you are studying now or studied)</label>
+        <input value="{{$graduation->university_name}}" name="university_name" style="font-size: 13px" id="password-register" class="form-control" type="text" placeholder="University Name" min="0"/>
+        @error('university_name')
+        <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+        @enderror
+      </div>
+      <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">confirm</button>
+    </form>
   </div>
+  <div class="col-3"></div>
+</div>
+
+  
