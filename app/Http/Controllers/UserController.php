@@ -729,51 +729,68 @@ class UserController extends Controller
     }
 
 
-    //delete graduation normally
+
+
+
+
+
+    //graduation edit
+
+
     public function deleteGraduation(Graduation $graduation , User $user){
-        $id = $user->id;
-        if($user->cannot('delete' , $graduation)){
-            return redirect("/create-cv-form/$id/graduation")->with('failure','It cannot be deleted!');
-        }else{
-            $graduation->delete();
-            return redirect("/create-cv-form/$id/graduation")->with('message','successfully deleted!');
-
-        }
-    }
-
-    public function deleteGraduationChange(Graduation $graduation , User $user){
         $id = $user->id;
         
         if($user->cannot('delete' , $graduation)){
             return redirect("/create-cv-form/$id/graduation")->with('failure','It cannot be deleted!');
         }else{
             $graduation->delete();
-            return redirect("/create-cv-form/$id/graduation")->with('message','successfully deleted!');
+            return redirect("/create-cv-form/$id/graduation")->with('message','The graduation successfully deleted!');
+
+        }
+    }
+
+    //deleting skills in change mode
+    public function deleteGraduationChange(Graduation $graduation , User $user){
+        $id = $user->id;
+        
+        if($user->cannot('delete' , $graduation)){
+            return redirect("/create-cv-form/$id/edit/graduation")->with('failure','It cannot be deleted!');
+        }else{
+            $graduation->delete();
+            return redirect("/create-cv-form/$id/edit/graduation")->with('message','The graduation successfully deleted!');
 
         }
     }
 
 
-      //add new graduation
-      public function addNewGraduation(Request $request, User $user){ 
+    //edit form for skills
+    public function updateGraduationForm(Graduation $graduation , User $user){
+        return view ('changes.edit-graduation-page' , ['graduations'=> $graduation ,'user'=> $user ]);
+    }
+
+    //save edit skills
+    public function saveUpdateGraduation(Request $request, Graduation $graduation , User $user){
+        $id = $user->id;
 
 
-
-
-
+          
+        //check wich part of graduation is empty
         if ((empty($request['university_name'])) && (empty($request['university_major'])) && (empty($request['high_school_major']))){
             $incomingFields = $request->validate([
-                'level'=>'required',
+                'level'=>'required|string',
             ]);
-         
-            $incomingFields['high_school_major'] =  "None";
             $incomingFields['level'] = strip_tags($incomingFields['level']);
+            $incomingFields['high_school_major'] =  "None";
             $incomingFields['university_major'] = "None";
             $incomingFields['university_name'] = "None";
             $incomingFields['user_id'] = auth()->id();
-            Graduation::create($incomingFields);
-            $id = $user->id;
-            return redirect("/create-cv-form/$id/edit/graduation")->with('message','Your graduation data have been saved!');
+            if($graduation){
+                $graduation->update($incomingFields);
+                return redirect("/create-cv-form/$id/graduation")->with('message','Congrats! you edited the graduation successfully!') ; 
+            }else{
+                return redirect("/create-cv-form/$id/graduation")->with('failure','You cannot edit the graduation!') ; 
+    
+            }
         }
 
         //
@@ -787,9 +804,13 @@ class UserController extends Controller
             $incomingFields['university_major'] = "None";
             $incomingFields['university_name'] = "None";
             $incomingFields['user_id'] = auth()->id();
-            Graduation::create($incomingFields);
-        $id = $user->id;
-        return redirect("/create-cv-form/$id/edit/graduation")->with('message','Your graduation data have been saved!');
+            if($graduation){
+                $graduation->update($incomingFields);
+                return redirect("/create-cv-form/$id/graduation")->with('message','Congrats! you edited the graduation successfully!') ; 
+            }else{
+                return redirect("/create-cv-form/$id/graduation")->with('failure','You cannot edit the graduation!') ; 
+    
+            }
         }
 
 //
@@ -804,9 +825,13 @@ class UserController extends Controller
             $incomingFields['high_school_major'] =  "None";
             $incomingFields['university_name'] = "None";
             $incomingFields['user_id'] = auth()->id();
-            Graduation::create($incomingFields);
-        $id = $user->id;
-        return redirect("/create-cv-form/$id/edit/graduation")->with('message','Your graduation data have been saved!');
+            if($graduation){
+                $graduation->update($incomingFields);
+                return redirect("/create-cv-form/$id/graduation")->with('message','Congrats! you edited the graduation successfully!') ; 
+            }else{
+                return redirect("/create-cv-form/$id/graduation")->with('failure','You cannot edit the graduation!') ; 
+    
+            }
         }
 
 
@@ -822,10 +847,17 @@ class UserController extends Controller
             $incomingFields['university_major'] = strip_tags($incomingFields['university_major']);
             $incomingFields['university_name'] = strip_tags($incomingFields['university_name']);
             $incomingFields['user_id'] = auth()->id();
-            Graduation::create($incomingFields);
-            $id = $user->id;
-            return redirect("/create-cv-form/$id/edit/graduation")->with('message','Your graduation data have been saved!');
-        }if ($request['university_major']){
+
+
+            if($graduation){
+                $graduation->update($incomingFields);
+                return redirect("/create-cv-form/$id/graduation")->with('message','Congrats! you edited the graduation successfully!') ; 
+            }else{
+                return redirect("/create-cv-form/$id/graduation")->with('failure','You cannot edit the graduation!') ; 
+    
+            }
+        }
+            if ($request['university_major']){
             $incomingFields = $request->validate([
                 'level'=>'required|string',
                 'high_school_major'=> 'string',
@@ -837,9 +869,13 @@ class UserController extends Controller
             $incomingFields['university_major'] = "None";
             $incomingFields['university_name'] = strip_tags($incomingFields['university_name']);
             $incomingFields['user_id'] = auth()->id();
-            Graduation::create($incomingFields);
-            $id = $user->id;
-            return redirect("/create-cv-form/$id/edit/graduation")->with('message','Your graduation data have been saved!');
+            if($graduation){
+                $graduation->update($incomingFields);
+                return redirect("/create-cv-form/$id/graduation")->with('message','Congrats! you edited the graduation successfully!') ; 
+            }else{
+                return redirect("/create-cv-form/$id/graduation")->with('failure','You cannot edit the graduation!') ; 
+    
+            }
         }if(empty($request['university_name'])){
             $incomingFields = $request->validate([
                 'level'=>'required|string',
@@ -852,9 +888,13 @@ class UserController extends Controller
             $incomingFields['university_major'] = strip_tags($incomingFields['university_major']);
             $incomingFields['university_name'] = "None";
             $incomingFields['user_id'] = auth()->id();
-            Graduation::create($incomingFields);
-            $id = $user->id;
-            return redirect("/create-cv-form/$id/edit/graduation")->with('message','Your graduation data have been saved!');
+            if($graduation){
+                $graduation->update($incomingFields);
+                return redirect("/create-cv-form/$id/graduation")->with('message','Congrats! you edited the graduation successfully!') ; 
+            }else{
+                return redirect("/create-cv-form/$id/graduation")->with('failure','You cannot edit the graduation!') ; 
+    
+            }
         }
         
 
@@ -869,14 +909,180 @@ class UserController extends Controller
         $incomingFields['university_major'] = strip_tags($incomingFields['university_major']);
         $incomingFields['university_name'] = strip_tags($incomingFields['university_name']);
         $incomingFields['user_id'] = auth()->id();
-        Graduation::create($incomingFields);
-        $id = $user->id;
-        return redirect("/create-cv-form/$id/edit/graduation")->with('message','Your graduation data have been saved!');
-        
+        if($graduation){
+            $graduation->update($incomingFields);
+            return redirect("/create-cv-form/$id/graduation")->with('message','Congrats! you edited the graduation successfully!') ; 
+        }else{
+            return redirect("/create-cv-form/$id/graduation")->with('failure','You cannot edit the graduation!') ; 
+
+        }
+
     }
 
+    //edit skills in change mode
+    public function updateGraduationFormCahnge(Graduation $graduation , User $user){
+        return view ('changes.edit-skill-page-change-skill' , ['skill'=> $graduation ,'user'=> $user ]);
+    }
+    //save edit skills in change mode
+    public function saveUpdateGraduationChange(Request $request, Graduation $graduation , User $user){
+        $id = $user->id;
+
+
+          
+        //check wich part of graduation is empty
+        if ((empty($request['university_name'])) && (empty($request['university_major'])) && (empty($request['high_school_major']))){
+            $incomingFields = $request->validate([
+                'level'=>'required|string',
+            ]);
+            $incomingFields['level'] = strip_tags($incomingFields['level']);
+            $incomingFields['high_school_major'] =  "None";
+            $incomingFields['university_major'] = "None";
+            $incomingFields['university_name'] = "None";
+            $incomingFields['user_id'] = auth()->id();
+            if($graduation){
+                $graduation->update($incomingFields);
+                            return redirect("/create-cv-form/$id/edit/graduation")->with('message','Congrats! you edited the graduation successfully!') ; 
+
+            }else{
+                 return redirect("/create-cv-form/$id/edit/graduation")->with('failure','You cannot edit the graduation!'); 
+    
+            }
+        }
+
+        //
+        if ((empty($request['university_name'])) && (empty($request['university_major']))){
+            $incomingFields = $request->validate([
+                'level'=>'required|string',
+                'high_school_major'=>'string'
+            ]);
+            $incomingFields['level'] = strip_tags($incomingFields['level']);
+            $incomingFields['high_school_major'] = strip_tags($incomingFields['high_school_major']);
+            $incomingFields['university_major'] = "None";
+            $incomingFields['university_name'] = "None";
+            $incomingFields['user_id'] = auth()->id();
+            if($graduation){
+                $graduation->update($incomingFields);
+                            return redirect("/create-cv-form/$id/edit/graduation")->with('message','Congrats! you edited the graduation successfully!') ; 
+
+            }else{
+                 return redirect("/create-cv-form/$id/edit/graduation")->with('failure','You cannot edit the graduation!'); 
+    
+            }
+        }
+
+//
+        if ((empty($request['university_name'])) && (empty($request['high_school_major']))){
+            $incomingFields = $request->validate([
+                'level'=>'required|string',
+                'university_major'=>'string'
+            ]);
+            $incomingFields['level'] = strip_tags($incomingFields['level']);
+            $incomingFields['university_major'] = strip_tags($incomingFields['university_major']);
+
+            $incomingFields['high_school_major'] =  "None";
+            $incomingFields['university_name'] = "None";
+            $incomingFields['user_id'] = auth()->id();
+            if($graduation){
+                $graduation->update($incomingFields);
+                            return redirect("/create-cv-form/$id/edit/graduation")->with('message','Congrats! you edited the graduation successfully!') ; 
+
+            }else{
+                 return redirect("/create-cv-form/$id/edit/graduation")->with('failure','You cannot edit the graduation!'); 
+    
+            }
+        }
+
+
+
+        if(empty($request['high_school_major'])){
+            $incomingFields = $request->validate([
+                'level'=>'required|string',
+                'university_major'=> 'string',
+                'university_name'=> 'string',
+            ]);
+            $incomingFields['level'] = strip_tags($incomingFields['level']);
+            $incomingFields['high_school_major'] = "None";
+            $incomingFields['university_major'] = strip_tags($incomingFields['university_major']);
+            $incomingFields['university_name'] = strip_tags($incomingFields['university_name']);
+            $incomingFields['user_id'] = auth()->id();
+
+
+            if($graduation){
+                $graduation->update($incomingFields);
+                            return redirect("/create-cv-form/$id/edit/graduation")->with('message','Congrats! you edited the graduation successfully!') ; 
+
+            }else{
+                 return redirect("/create-cv-form/$id/edit/graduation")->with('failure','You cannot edit the graduation!'); 
+    
+            }
+        }
+            if ($request['university_major']){
+            $incomingFields = $request->validate([
+                'level'=>'required|string',
+                'high_school_major'=> 'string',
+
+                'university_name'=> 'string',
+            ]);
+            $incomingFields['level'] = strip_tags($incomingFields['level']);
+            $incomingFields['high_school_major'] =  strip_tags($incomingFields['high_school_major']);
+            $incomingFields['university_major'] = "None";
+            $incomingFields['university_name'] = strip_tags($incomingFields['university_name']);
+            $incomingFields['user_id'] = auth()->id();
+            if($graduation){
+                $graduation->update($incomingFields);
+                            return redirect("/create-cv-form/$id/edit/graduation")->with('message','Congrats! you edited the graduation successfully!') ; 
+
+            }else{
+                 return redirect("/create-cv-form/$id/edit/graduation")->with('failure','You cannot edit the graduation!'); 
+    
+            }
+        }if(empty($request['university_name'])){
+            $incomingFields = $request->validate([
+                'level'=>'required|string',
+                'high_school_major'=> 'string',
+                'university_major'=> 'string',
+
+            ]);
+            $incomingFields['level'] = strip_tags($incomingFields['level']);
+            $incomingFields['high_school_major'] =  strip_tags($incomingFields['high_school_major']);
+            $incomingFields['university_major'] = strip_tags($incomingFields['university_major']);
+            $incomingFields['university_name'] = "None";
+            $incomingFields['user_id'] = auth()->id();
+            if($graduation){
+                $graduation->update($incomingFields);
+                            return redirect("/create-cv-form/$id/edit/graduation")->with('message','Congrats! you edited the graduation successfully!') ; 
+
+            }else{
+                 return redirect("/create-cv-form/$id/edit/graduation")->with('failure','You cannot edit the graduation!'); 
+    
+            }
+        }
         
+
+        $incomingFields = $request->validate([
+            'level'=>'required|string',
+            'high_school_major'=> 'string',
+            'university_major'=> 'string',
+            'university_name'=> 'string',
+        ]);
+        $incomingFields['level'] = strip_tags($incomingFields['level']);
+        $incomingFields['high_school_major'] = strip_tags($incomingFields['high_school_major']);
+        $incomingFields['university_major'] = strip_tags($incomingFields['university_major']);
+        $incomingFields['university_name'] = strip_tags($incomingFields['university_name']);
+        $incomingFields['user_id'] = auth()->id();
+        if($graduation){
+            $graduation->update($incomingFields);
+                        return redirect("/create-cv-form/$id/edit/graduation")->with('message','Congrats! you edited the graduation successfully!') ; 
+
+        }else{
+             return redirect("/create-cv-form/$id/edit/graduation")->with('failure','You cannot edit the graduation!'); 
+
+        }
+    }
 }
+
+        
+
   
    
 

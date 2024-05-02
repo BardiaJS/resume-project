@@ -115,7 +115,7 @@
           <p>{{$skill->title}}</p>
           <p style="color: green">{{$skill->body}}</p>
           @can('update' , $skill)
-          <form action="/delete/{{$skill->id}}/{{$user->id}}" method="POST" id="registration-form">
+          <form action="/delete-skill/{{$skill->id}}/{{$user->id}}" method="POST" id="registration-form">
             @csrf
             @method('DELETE')
             <button type="submit"  style="width:100px; height:30px; text-align:center; background-color:#e4bdbd">delete</button>
@@ -124,7 +124,7 @@
           @endcan
 
           @can('update' , $skill)
-          <form action="/edit/{{$skill->id}}/{{$user->id}}" method="GET" id="registration-form">
+          <form action="/edit-skill/{{$skill->id}}/{{$user->id}}" method="GET" id="registration-form">
             <button type="submit" style="width:100px; height:30px; text-align:center; margin-top:10px; background-color:#e4bdbd">edit</button>
           </form>
           

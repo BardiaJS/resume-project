@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,8 +17,7 @@
     <header class="header-bar mb-3">
       <div class="container d-flex flex-column flex-md-row align-items-center p-3">
         <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">OurApp</a></h4>
-
-        
+        edit change
           @auth
           <div class="flex-row my-3 my-md-0">
             @if (auth()->user()->isCreateCV == 1)
@@ -65,92 +63,47 @@
     </div>
   </div>
 @endif
-  <div class="container py-md-5">
 
+<div class="container py-md-5">
     <div class="row align-items-center">
       <div class="col-3"></div>
-      <div class="col6" style="text-align: center">
-
-        <form action="/create-cv-form/{{$user->id}}/edit/skill/save" method="POST" id="registration-form">
+      <div class="col-6">
+        <form action="/edit-graduation/{{$graduation->id}}/{{auth()->user()->id}}/save" method="POST" id="registration-form">
           @csrf
-          <div class="form-group" style="text-align: center">
-            Enter your skills
-          </div>
           <div class="form-group">
-            <label for="username-register" class="text-muted mb-1">Title</label>
-            <input name="title" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Name" autocomplete="off" />
-            @error('title')
+            <label for="username-register" class="text-muted mb-1">Graduation Level</label>
+            <input value="{{$graduation->level}}" name="level" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Graduation level" autocomplete="off" />
+            @error('level')
             <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
             @enderror
           </div>
 
           <div class="form-group">
-            <label for="email-register" class="text-muted mb-1">Body</label>
-            <input name="body" style="font-size: 13px" id="email-register" class="form-control" type="text" placeholder="Description" autocomplete="off" />
-            @error('body')
+            <label for="email-register" class="text-muted mb-1">What is your major in high school?</label>
+            <input value="{{$graduation->high_school_major}}" name="high_school_major" style="font-size: 13px" id="email-register" class="form-control" type="text" placeholder="Major in high school" autocomplete="off" />
+            @error('high_school_major')
             <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
             @enderror
           </div>
 
+          <div class="form-group">
+            <label for="password-register" class="text-muted mb-1">What is your major in university?(if you are studying now or studied)</label>
+            <input value="{{$graduation->university_major}}" name="university_major" style="font-size: 13px" id="password-register" class="form-control" type="text" placeholder="Major in university" min="0"/>
+            @error('university_major')
+            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+            @enderror
+          </div>
 
-
-          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Confirm</button>
-
-
-        </form>
-
-        <form action="/change-profile/{{auth()->user()->id}}" method="get" id="registration-form">
-          @csrf
+          <div class="form-group">
+            <label for="password-register" class="text-muted mb-1">What is(was) your university name?(if you are studying now or studied)</label>
+            <input value="{{$graduation->university_name}}" name="university_name" style="font-size: 13px" id="password-register" class="form-control" type="text" placeholder="University Name" min="0"/>
+            @error('university_name')
+            <p class="m-0 small alert alert-danger shadow-sm">{{$message}}</p>
+            @enderror
+          </div>
           <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">save changes</button>
         </form>
-
-        
       </div>
       <div class="col-3"></div>
     </div>
   </div>
-  <div>
-   
-      @foreach ($skills as $skill)
-      <div>
-            
-         
-        <div class="" style="border: 1px solid black; text-align:center">
-        <p>{{$skill->title}}</p>
-        <p style="color: green">{{$skill->body}}</p>
-        @can('update' , $skill)
-        <form action="/delete-skill/{{$skill->id}}/{{auth()->user()->id}}/change" method="POST" id="registration-form">
-          @csrf
-          @method('DELETE')
-          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">delete</button>
-
-        </form>
-        @endcan
-                  @can('update' , $skill)
-          <form action="/edit-skill/{{$skill->id}}/{{auth()->user()->id}}/change" method="GET" id="registration-form">
-            <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">edit</button>
-          </form>
-          
-          @endcan
-        </div>
-      </div>
-      @endforeach
-   
-  </div>
-    <!-- footer begins -->
-    <footer class="border-top text-center small text-muted py-3">
-      <p class="m-0">Copyright &copy; {{date('Y')}} <a href="/" class="text-muted">OurApp</a>. All rights reserved.</p>
-    </footer>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script>
-      $('[data-toggle="tooltip"]').tooltip()
-    </script>
-  </body>
-</html>
-
-
-
-  

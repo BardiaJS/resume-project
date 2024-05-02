@@ -118,50 +118,58 @@ Route::get('/forget-password', [UserController::class,'showForgetPassPage'])->mi
 Route::post('/forget-password/save', [UserController::class,'changeTheForgetPassword'])->middleware('guest');
 
 //delete skills
-Route::delete('/delete/{skill}/{user}', [UserController::class,'deleteSkills'])->middleware('auth');
+Route::delete('/delete-skill/{skill}/{user}', [UserController::class,'deleteSkills'])->middleware('auth');
 
-//delete in change mode skills
-Route::delete('/delete/{skill}/{user}/change', [UserController::class,'deleteSkillsChange'])->middleware('auth');
+//delete skill in change mode skills
+Route::delete('/delete-skill/{skill}/{user}/change', [UserController::class,'deleteSkillsChange'])->middleware('auth');
 
 //edit skills form
-Route::get('/edit/{skill}/{user}', [UserController::class,'updateSkillsForm'])->middleware('auth');
+Route::get('/edit-skill/{skill}/{user}', [UserController::class,'updateSkillsForm'])->middleware('auth');
 
 //save edit skills
-Route::post('/edit/{skill}/{user}/save', [UserController::class,'saveUpdateSkills'])->middleware('auth');
+Route::post('/edit-skill/{skill}/{user}/save', [UserController::class,'saveUpdateSkills'])->middleware('auth');
 
 
 //edit skills in change mode form
-Route::get('/edit/{skill}/{user}/change', [UserController::class,'updateSkillsFormCahnge'])->middleware('auth');
+Route::get('/edit-skill/{skill}/{user}/change', [UserController::class,'updateSkillsFormCahnge'])->middleware('auth');
 
 //save edit in change mode skills
-Route::post('/edit/{skill}/{user}/change/save', [UserController::class,'saveUpdateSkillsChange'])->middleware('auth');
+Route::post('/edit-skill/{skill}/{user}/change/save', [UserController::class,'saveUpdateSkillsChange'])->middleware('auth');
+
+
+
+
+//graduation relational
+
+
+
+
+
+
 
 
 
 
 //delete graduations
-Route::delete('/delete-cv/{graduation}/{user}', [UserController::class,'deleteGraduation'])->middleware('auth');
+Route::delete('/delete-graduation/{graduation}/{user}', [UserController::class,'deleteGraduation'])->middleware('auth');
 
-//delete in chang mode graduations
-Route::delete('/delete/{graduation}/{user}/change', [UserController::class,'deleteGraduationChange'])->middleware('auth');
+//delete graduation in change mode graduations
+Route::delete('/delete-graduation/{graduation}/{user}/change', [UserController::class,'deleteGraduationChange'])->middleware('auth');
 
 //edit graduation form
-Route::get('/edit/{skill}/{user}', [UserController::class,'updateSkillsForm'])->middleware('auth');
+Route::get('/edit-graduation/{graduation}/{user}', [UserController::class,'updateGraduationForm'])->middleware('auth');
 
-//save graduation skills
-Route::post('/edit/{skill}/{user}/save', [UserController::class,'saveUpdateSkills'])->middleware('auth');
+//save edit graduation
+Route::post('/edit-graduation/{graduation}/{user}/save', [UserController::class,'saveUpdateGraduation'])->middleware('auth');
 
 
 //edit graduation in change mode form
-Route::get('/edit/{skill}/{user}/change', [UserController::class,'updateSkillsFormCahnge'])->middleware('auth');
+Route::get('/edit-graduation/{graduation}/{user}/change', [UserController::class,'updateGraduationFormCahnge'])->middleware('auth');
 
 //save edit in change mode graduation
-Route::post('/edit/{skill}/{user}/change/save', [UserController::class,'saveUpdateSkillsChange'])->middleware('auth');
+Route::post('/edit-graduation/{graduation}/{user}/change/save', [UserController::class,'saveUpdateGraduationChange'])->middleware('auth');
 
 
-
-//save and add the graduation edit settings
-Route::post('/create-cv-form/{user}/edit/graduation/add/save', [UserController::class,'addNewGraduation'])->middleware('auth');
 
 
 
