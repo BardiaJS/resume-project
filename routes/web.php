@@ -121,7 +121,7 @@ Route::post('/forget-password/save', [UserController::class,'changeTheForgetPass
 Route::delete('/delete/{skill}/{user}', [UserController::class,'deleteSkills'])->middleware('auth');
 
 //delete in change mode skills
-Route::delete('/delete/{skill}/{users}/change', [UserController::class,'deleteSkillsChange'])->middleware('auth');
+Route::delete('/delete/{skill}/{user}/change', [UserController::class,'deleteSkillsChange'])->middleware('auth');
 
 //edit skills form
 Route::get('/edit/{skill}/{user}', [UserController::class,'updateSkillsForm'])->middleware('auth');
@@ -157,6 +157,11 @@ Route::get('/edit/{skill}/{user}/change', [UserController::class,'updateSkillsFo
 
 //save edit in change mode graduation
 Route::post('/edit/{skill}/{user}/change/save', [UserController::class,'saveUpdateSkillsChange'])->middleware('auth');
+
+
+
+//save and add the graduation edit settings
+Route::post('/create-cv-form/{user}/edit/graduation/add/save', [UserController::class,'addNewGraduation'])->middleware('auth');
 
 
 
