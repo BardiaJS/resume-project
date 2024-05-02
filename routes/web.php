@@ -140,7 +140,7 @@ Route::post('/edit/{skill}/{user}/change/save', [UserController::class,'saveUpda
 
 
 //delete graduations
-Route::delete('/delete/{graduation}/{user}', [UserController::class,'deleteGraduation'])->middleware('auth');
+Route::delete('/delete-cv/{graduation}/{user}', [UserController::class,'deleteGraduation'])->middleware('auth');
 
 //delete in chang mode graduations
 Route::delete('/delete/{graduation}/{user}/change', [UserController::class,'deleteGraduationChange'])->middleware('auth');

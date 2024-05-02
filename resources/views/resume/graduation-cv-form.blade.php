@@ -125,7 +125,7 @@
     <p style="font-weight: bold"><span style="color:green">{{$graduation->university_name}}</span></p>
 
     @can('update' , $graduation)
-    <form action="/delete/{{$graduation->id}}/{{auth()->user()->id}}" method="POST" id="registration-form">
+    <form action="/delete-cv/{{$graduation->id}}/{{auth()->user()->id}}" method="POST" id="registration-form">
       @csrf
       @method('DELETE')
       <button type="submit"  style="width:100px; height:30px; text-align:center; background-color:#e4bdbd">delete</button>

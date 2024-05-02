@@ -732,7 +732,6 @@ class UserController extends Controller
     //delete graduation normally
     public function deleteGraduation(Graduation $graduation , User $user){
         $id = $user->id;
-        
         if($user->cannot('delete' , $graduation)){
             return redirect("/create-cv-form/$id/graduation")->with('failure','It cannot be deleted!');
         }else{
