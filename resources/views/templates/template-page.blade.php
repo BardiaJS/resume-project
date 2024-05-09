@@ -145,7 +145,6 @@ span.psw {
           @auth
           <div class="flex-row my-3 my-md-0">
             @if (auth()->user()->isCreateCV == 1)
-              <a href="#" class="mr-2"><img title="My Profile" data-toggle="tooltip" data-placement="bottom" style="width: 32px; height: 32px; border-radius: 16px" src="https://gravatar.com/avatar/f64fc44c03a8a7eb1d52502950879659?s=128" /></a>
             @endif
             <div>
               <a href="/" style="text-decoration:none; color:black; margin-left:0%"><img width="24" height="24" src="https://img.icons8.com/material-rounded/24/back--v1.png"/>Back</a>

@@ -28,7 +28,7 @@ class UserController extends Controller
     //register the user 
     public function registerUser(Request $request){
         $incomingFields = $request->validate([
-            'username'=>['required','min:3','max:12'],
+            'username'=>['required','min:3','max:12' , 'regex:/^[a-zA-Z0-9]+$/'],
             'email'=>['required','email',Rule::unique('users' , 'email')],
             'password'=>['required','confirmed','min:6'],
             'first_high_school_name'=>['required']
@@ -67,19 +67,26 @@ class UserController extends Controller
 
     //show personal info cv form
     public function showPersonalCVForm(User $user){
-        $skillData =(bool)DB::table('personals')->where('user_id', auth()->id())->first();       
-        if($skillData){
-            $data =(bool)DB::table('experiences')->where('user_id', auth()->id())->first();       
-            if($data){
-                return view('resume.graduation-cv-form' , ['user'=>$user , 'graduations' => $user->graduation()->latest()->get()]);
+        $userData  =(bool)DB::table('personals')->where('user_id', auth()->id())->first(); 
+        if($userData){
+            $skillData =(bool)DB::table('skills')->where('user_id', auth()->id())->first(); 
+            if($skillData){
+                $data =(bool)DB::table('experiences')->where('user_id', auth()->id())->first();       
+                if($data){
+                    return view('resume.graduation-cv-form' , ['user'=>$user , 'graduations' => $user->graduation()->latest()->get()]);
+                }else{
+                    $id = $user->id;
+                    return redirect("/create-cv-form/$id/work-experience");
+                }
+    
             }else{
                 $id = $user->id;
                 return redirect("/create-cv-form/$id/skills");
             }
-
         }else{
             return view('resume.personal-cv-form' , ['user'=>$user]);
         }
+
         
     }
 
@@ -129,7 +136,17 @@ class UserController extends Controller
 
     // show the work experience form 
     public function showWorkExpCVForm(User $user){
-        return view('resume.work-experience-cv-form', ['user'=>$user]);
+
+            $data =(bool)DB::table('experiences')->where('user_id', auth()->id())->first();       
+            if($data){
+                return view('resume.graduation-cv-form' , ['user'=>$user , 'graduations' => $user->graduation()->latest()->get()]);
+            }else{
+                return view('resume.work-experience-cv-form', ['user'=>$user]);
+            }
+
+        // }else{
+        //     return view('resume.personal-cv-form' , ['user'=>$user]);
+        // }
     }
 
     //set the work experience data to database
@@ -167,7 +184,7 @@ class UserController extends Controller
                 'university_name' => 'required'
             ]);
          
-            $incomingFields['high_school_major'] =  "None";
+            $incomingFields['high_school_major'] = "None";
             $incomingFields['level'] = strip_tags($incomingFields['level']);
             $incomingFields['university_major'] = strip_tags($incomingFields['university_major']);
             $incomingFields['university_name'] = strip_tags($incomingFields['university_name']);
@@ -179,9 +196,10 @@ class UserController extends Controller
             $incomingFields = $request->validate([
                 'level'=>'required',
                 'university_major'=>'required',
-                'university_name' => 'required'
+                'university_name' => 'required',
+                'high_school_major' => 'required'
             ]);
-            $incomingFields['high_school_major'] =  strip_tags($incomingFields['high_school_major']);;
+            $incomingFields['high_school_major'] = strip_tags($incomingFields['high_school_major']);;
             $incomingFields['level'] = strip_tags($incomingFields['level']);
             $incomingFields['university_major'] = strip_tags($incomingFields['university_major']);
             $incomingFields['university_name'] = strip_tags($incomingFields['university_name']);
@@ -195,12 +213,20 @@ class UserController extends Controller
 
     // show the template for resume
     public function showTemplates(User $user){
-        return view('templates.template-page', ['user'=>$user]);
+        
+        if($user->wichTeplate > 0){
+            return redirect('/')->with('message','information saved!');
+        }else{
+            return view('templates.template-page', ['user'=>$user]);
+        }
     }
 
 
     //show the first template
     public function showFirstTemplate(User $user){
+        $skillData =(bool)DB::table('skills')->where('user_id', auth()->id())->first();       
+        $graduationData = (bool)DB::table('graduations')->where('user_id', auth()->id())->first();      
+        
         $id = auth()->id();
         $personal = $user->personal;
         $skill = $user->skill()->latest()->get();
@@ -210,12 +236,14 @@ class UserController extends Controller
         $user->wichTeplate = 1;
         $user->save();
 
-        return view('templates.first-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
+        return view('templates.first-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation , 'skillData' => $skillData , 'graduationData' => $graduationData]);
 
     }
 
        //show the second template
        public function showSecondTemplate(User $user){
+        $skillData =(bool)DB::table('skills')->where('user_id', auth()->id())->first();       
+        $graduationData = (bool)DB::table('graduations')->where('user_id', auth()->id())->first(); 
         $id = auth()->id();
         $personal = $user->personal;
         $skill = $user->skill()->latest()->get();
@@ -225,12 +253,14 @@ class UserController extends Controller
         $user->wichTeplate = 2;
         $user->save();
 
-        return view('templates.second-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
+        return view('templates.second-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation , 'skillData' => $skillData , 'graduationData' => $graduationData]);
 
     }
 
        //show the third template
        public function showThirdTemplate(User $user){
+        $skillData =(bool)DB::table('skills')->where('user_id', auth()->id())->first();       
+        $graduationData = (bool)DB::table('graduations')->where('user_id', auth()->id())->first(); 
         $id = auth()->id();
         $personal = $user->personal;
         $skill = $user->skill()->latest()->get();
@@ -240,12 +270,14 @@ class UserController extends Controller
         $user->wichTeplate = 3;
         $user->save();
 
-        return view('templates.third-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
+        return view('templates.third-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation ,'skillData' => $skillData , 'graduationData' => $graduationData]);
 
     }
 
        //show the fourth template
        public function showFourthTemplate(User $user){
+        $skillData =(bool)DB::table('skills')->where('user_id', auth()->id())->first();       
+        $graduationData = (bool)DB::table('graduations')->where('user_id', auth()->id())->first(); 
         $id = auth()->id();
         $personal = $user->personal;
         $skill = $user->skill()->latest()->get();
@@ -254,8 +286,7 @@ class UserController extends Controller
         $user->isCreateCV = 1;
         $user->wichTeplate = 4;
         $user->save();
-
-        return view('templates.fourth-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation]);
+        return view('templates.fourth-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation , 'skillData' => $skillData , 'graduationData' => $graduationData]);
 
     }
 
@@ -291,7 +322,7 @@ class UserController extends Controller
     //save user info changing
     public function saveUserChanging(Request $request , User $user){
         $incomingFields = $request->validate([
-            'username'=>'required',
+            'username'=>['required','regex:/^[a-zA-Z0-9]+$/'],
             'email'=>['required','email',Rule::unique('users' , 'email')]
         ]);
         $user->update($incomingFields);
