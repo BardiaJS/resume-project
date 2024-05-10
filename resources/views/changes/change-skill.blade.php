@@ -68,7 +68,7 @@
 
     <div class="row align-items-center">
       <div class="col-3"></div>
-      <div class="col6" style="text-align: center">
+      <div class="col-6" style="text-align: center">
 
         <form action="/create-cv-form/{{$user->id}}/edit/skill/save" method="POST" id="registration-form">
           @csrf
@@ -121,13 +121,13 @@
         <form action="/delete-skill/{{$skill->id}}/{{auth()->user()->id}}/change" method="POST" id="registration-form">
           @csrf
           @method('DELETE')
-          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">delete</button>
+          <button type="submit" style="width:100px; height:30px; text-align:center; margin-top:10px; background-color:#e4bdbd">delete</button>
 
         </form>
         @endcan
                   @can('update' , $skill)
           <form action="/edit-skill/{{$skill->id}}/{{auth()->user()->id}}/change" method="GET" id="registration-form">
-            <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">edit</button>
+            <button type="submit" style="width:100px; height:30px; text-align:center; margin-top:10px; background-color:#e4bdbd">edit</button>
           </form>
           
           @endcan

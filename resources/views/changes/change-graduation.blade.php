@@ -15,10 +15,9 @@
   </head>
   <body>
     <header class="header-bar mb-3">
-      <div class="container d-flex flex-column flex-md-row align-items-center p-3">
+      <div class="col-3"></div>
+      <div class="col-6" style="text-align: center">        
         <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">OurApp</a></h4>
-
-        hellllllllllllllo
           @auth
           <div class="flex-row my-3 my-md-0">
             @if (auth()->user()->isCreateCV == 1)
@@ -138,13 +137,13 @@
       <form action="/delete-graduation/{{$graduation->id}}/{{auth()->user()->id}}/change" method="POST" id="registration-form">
         @csrf
         @method('DELETE')
-        <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">delete</button>
+        <button type="submit" style="width:100px; height:30px; text-align:center; margin-top:10px; background-color:#e4bdbd">delete</button>
 
       </form>
       @endcan
                 @can('update' , $graduation)
         <form action="/edit-graduation/{{$graduation->id}}/{{auth()->user()->id}}/change" method="GET" id="registration-form">
-          <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">edit</button>
+          <button type="submit" style="width:100px; height:30px; text-align:center; margin-top:10px; background-color:#e4bdbd">edit</button>
         </form>
         
         @endcan

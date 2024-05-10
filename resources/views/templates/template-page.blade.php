@@ -172,10 +172,12 @@ span.psw {
     <!-- header ends here -->
 
 
-<h2>Wich template you want? choose one</h2>
+  <h2 style="text-align: center">Wich template you want? choose one</h2>
 
 
-{{-- first template --}}
+<div style="display:flex; text-align:center; justify-content:center; align-items:center; margin-top:5%">
+  {{-- first template --}}
+
 <button onclick="document.getElementById('image1').style.display='block'" style="width:auto;">Template1</button>
 
 <div id="image1" class="modal">
@@ -200,7 +202,7 @@ span.psw {
 </div>
 
 {{-- second template --}}
-<button onclick="document.getElementById('image2').style.display='block'" style="width:auto;">Template2</button>
+<button onclick="document.getElementById('image2').style.display='block'" style="width:auto; margin-left:3%">Template2</button>
 
 <div id="image2" class="modal">
   
@@ -224,7 +226,7 @@ span.psw {
 </div>
 
 {{-- third template --}}
-<button onclick="document.getElementById('image3').style.display='block'" style="width:auto;">Template3</button>
+<button onclick="document.getElementById('image3').style.display='block'" style="width:auto; margin-left:3%">Template3</button>
 
 <div id="image3" class="modal">
   
@@ -261,7 +263,7 @@ span.psw {
 
 
 {{-- fourth template --}}
-<button onclick="document.getElementById('image4').style.display='block'" style="width:auto;">Template4</button>
+<button onclick="document.getElementById('image4').style.display='block'" style="width:auto;margin-left:3%">Template4</button>
 
 <div id="image4" class="modal">
   
@@ -283,6 +285,8 @@ span.psw {
     </div>
   </form>
 </div>
+</div>
+
 
 <script>
 // Get the modal

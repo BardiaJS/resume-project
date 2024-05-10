@@ -19,7 +19,7 @@
       <div class="container d-flex flex-column flex-md-row align-items-center p-3">
         <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">OurApp</a></h4>
 
-        
+
           @auth
           <div class="flex-row my-3 my-md-0">
             @if (auth()->user()->isCreateCV == 1)
@@ -66,7 +66,8 @@
 @endif
   <div class="container py-md-5">
     <div class="row align-items-center">
-      <div class="col-lg-5 pl-lg-5 pb-3 py-lg-5" style="text-align: center">
+    <div class="col-3"></div>
+    <div class="col-6" style="text-align: center">
 
         <form action="/create-cv-form/{{$user->id}}/edit/experience/save" method="POST" id="registration-form">
           @csrf
@@ -92,6 +93,8 @@
 
         
       </div>
+      <div class="col-3"></div>
+
     </div>
   </div>
     <!-- footer begins -->
