@@ -1,12 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\SkillController;
+use App\Http\Controllers\PersonalController;
+
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\GraduationController;
-use App\Http\Controllers\PersonalController;
-use App\Http\Controllers\SkillController;
-use App\Http\Controllers\UserController;
-
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -167,5 +168,9 @@ Route::post('/edit-graduation/{graduation}/{user}/change/save', [GraduationContr
 
 
 
+
+//image relational
+Route::get('/image-upload/{user}', [ImageController::class,'index'])->middleware('auth');
+Route::post('/upload-image/{user}', [ImageController::class,'storeImage'])->middleware('auth');
 
 

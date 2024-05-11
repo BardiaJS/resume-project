@@ -38,21 +38,23 @@ class PersonalController extends Controller
     //set the personal cv data to database and going next step
     public function getPersonalCV(Request $request , User $user){
         $incomingFields = $request->validate([
+
             'name'=>'required',
             'familyName'=>'required',
             'age'=>'required',
             'gender'=>'required',
             'military'=>'required'
         ]);
-        $incomingFields['name'] = strip_tags($incomingFields['name']);
-        $incomingFields['familyName'] = strip_tags($incomingFields['familyName']);
-        $incomingFields['military'] = strip_tags($incomingFields['military']);
-        $incomingFields['user_id'] = auth()->id();
-        
-        Personal::create($incomingFields);
-        $id = $user->id;
+            
+            $incomingFields['name'] = strip_tags($incomingFields['name']);
+            $incomingFields['familyName'] = strip_tags($incomingFields['familyName']);
+            $incomingFields['military'] = strip_tags($incomingFields['military']);
+            $incomingFields['user_id'] = auth()->id();
+            
+            Personal::create($incomingFields);
+            $id = $user->id;
   
-        return redirect("/create-cv-form/$id/skills" )->with('message','Your personal data have been saved!');
+        return redirect("/image-upload/$id" )->with('message','Your personal data have been saved!');
     }
 
      //change personal info form

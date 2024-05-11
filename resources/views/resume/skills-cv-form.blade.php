@@ -73,6 +73,7 @@
           <div class="form-group" style="text-align: center">
             Enter your skills
           </div>
+
           <div class="form-group">
             <label for="username-register" class="text-muted mb-1">Title</label>
             <input name="title" id="username-register" style="font-size: 13px" class="form-control" type="text" placeholder="Name" autocomplete="off" />

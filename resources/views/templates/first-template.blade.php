@@ -48,6 +48,7 @@
     <!-- header ends here -->
     {{-- personal inforamtion --}}
     <h1>Personal information</h1>
+    <img src="{{ asset('avatars/'.Session::get('avatar')) }}" />
     <h3>Name: {{$personal->name}}</h3>
     <h3>Family Name: {{$personal->familyName}}</h3>
     <h3>Age: {{$personal->age}}</h3>
