@@ -45,12 +45,13 @@ class ImageController extends Controller
     public function storeImageEdit(Request $request , User $user)
     {
             $id = $user->id;
-
             $requestData = $request->validate([
                 'avatar' => 'required|image|max:3000'
                ]);
                 $filName = time().$request->file('avatar')->getClientOriginalName();
                 $path = $request->file('avatar')->storeAs('avatars' , $filName , 'public');
+                $oldAvatar = $user->avatar;
+                Storage::delete(str_replace("/storage/" , "public/" , $oldAvatar));
                 $requestData ["avatar"] = '/storage/'. $path;
                 $user->avatar = $requestData['avatar'];
                 $user->update();
