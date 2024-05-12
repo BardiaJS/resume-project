@@ -48,7 +48,7 @@
     <!-- header ends here -->
     {{-- personal inforamtion --}}
     <h1>Personal information</h1>
-    <img src="{{ asset('avatars/'.Session::get('avatar')) }}" />
+    <img src="{{auth()->user()->avatar}}" style="width:200px; height:200px; clip-path:circle(); margin-top:20px; margin-bottom: 20px"/>
     <h3>Name: {{$personal->name}}</h3>
     <h3>Family Name: {{$personal->familyName}}</h3>
     <h3>Age: {{$personal->age}}</h3>
@@ -84,13 +84,13 @@
         @endforeach
       </h2>
 
-      @if ($skillData == false)
+      @if ($graduationData == false && $skillData == false)
       <h2>You should complete these information for better resume:</h2><a href="/create-cv-form/{{auth()->user()->id}}/skills">Skill</a>
+      <h2>You should complete these information for better resume:</h2><a href="/create-cv-form/{{auth()->user()->id}}/graduation">Graduation</a>
       @elseif ($graduationData == false)
       <h2>You should complete these information for better resume:</h2><a href="/create-cv-form/{{auth()->user()->id}}/graduation">Graduation</a>
-      @elseif ($graduationData == false && $skillData == false)
+      @elseif ($skillData == false)
       <h2>You should complete these information for better resume:</h2><a href="/create-cv-form/{{auth()->user()->id}}/skills">Skill</a>
-      <h2>You should complete these information for better resume:</h2><a href="/create-cv-form/{{auth()->user()->id}}/graduation">Graduation</a>
       @endif
       
   

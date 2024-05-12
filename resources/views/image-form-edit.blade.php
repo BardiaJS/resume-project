@@ -21,7 +21,7 @@
 
             <button type="submit" class="btn btn-sm">Upload</button>
         </form>
-        <form method="GET" action="/create-cv-form/{{auth()->user()->id}}/skills" enctype="multipart/form-data">
+        <form method="GET" action="/change-profile/{{auth()->user()->id}}" enctype="multipart/form-data">
             <button type="submit" class="btn btn-sm">Next</button>
         </form>
     </div>

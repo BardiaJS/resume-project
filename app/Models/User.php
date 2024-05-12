@@ -60,9 +60,5 @@ class User extends Authenticatable
     public function graduation(){
         return $this->hasMany(Graduation::class , 'user_id');
     }
-    public function avatar(): Attribute{
-        return Attribute::make(get: function($value){
-            return $value ? '/storage/avatars/' . $value : '/fallback-avatar.jpg';
-        });
-    }
+
 }

@@ -48,6 +48,7 @@
     <!-- header ends here -->
     {{-- personal inforamtion --}}
     <h1 style="color: rgb(255, 255, 255);">Personal information</h1>
+    <img src="{{auth()->user()->avatar}}" style="width:200px; height:200px; clip-path:circle(); margin-top:20px; margin-bottom: 20px"/>
     <h3 style="color: rgb(255, 255, 255);">Name: {{$personal->name}}</h3>
     <h3 style="color: rgb(255, 255, 255);">Family Name: {{$personal->familyName}}</h3>
     <h3 style="color: rgb(255, 255, 255);">Age: {{$personal->age}}</h3>
@@ -80,13 +81,13 @@
        <h3>{{$experience->body}}</h3>
 
        @endforeach
-       @if ($skillData == false)
+       @if ($graduationData == false && $skillData == false)
        <h2>You should complete these information for better resume:</h2><a href="/create-cv-form/{{auth()->user()->id}}/skills">Skill</a>
+       <h2>You should complete these information for better resume:</h2><a href="/create-cv-form/{{auth()->user()->id}}/graduation">Graduation</a>
        @elseif ($graduationData == false)
        <h2>You should complete these information for better resume:</h2><a href="/create-cv-form/{{auth()->user()->id}}/graduation">Graduation</a>
-       @elseif ($graduationData == false && $skillData == false)
+       @elseif ($skillData == false)
        <h2>You should complete these information for better resume:</h2><a href="/create-cv-form/{{auth()->user()->id}}/skills">Skill</a>
-       <h2>You should complete these information for better resume:</h2><a href="/create-cv-form/{{auth()->user()->id}}/graduation">Graduation</a>
        @endif
        <form action="/" method="GET" class="d-inline">
         @csrf

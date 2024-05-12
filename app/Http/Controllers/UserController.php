@@ -125,7 +125,6 @@ class UserController extends Controller
         $user->isCreateCV = 1;
         $user->wichTeplate = 3;
         $user->save();
-
         return view('templates.third-template', ['user'=>$user , 'personal' => $personal , 'skills' => $skill , 'experiences' => $experience , 'graduations' => $graduation ,'skillData' => $skillData , 'graduationData' => $graduationData]);
 
     }

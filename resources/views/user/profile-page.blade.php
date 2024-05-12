@@ -79,6 +79,9 @@
   <div class="row" style="text-align: center; margin-left:43%;">
     <a href="/create-cv-form/{{$user->id}}/edit/password" style="text-align: center">Change Password</a>
   </div>
+  <div class="row" style="text-align: center; margin-left:43%;">
+    <a href="/image-upload/{{$user->id}}/edit" style="text-align: center">Change Image</a>
+  </div>
 
 
 

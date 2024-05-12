@@ -166,11 +166,11 @@ Route::get('/edit-graduation/{graduation}/{user}/change', [GraduationController:
 //save edit in change mode graduation
 Route::post('/edit-graduation/{graduation}/{user}/change/save', [GraduationController::class,'saveUpdateGraduationChange'])->middleware('auth');
 
-
-
-
 //image relational
 Route::get('/image-upload/{user}', [ImageController::class,'index'])->middleware('auth');
 Route::post('/upload-image/{user}', [ImageController::class,'storeImage'])->middleware('auth');
 
+//edit image
+Route::get('/image-upload/{user}/edit', [ImageController::class,'indexEdit'])->middleware('auth');
+Route::post('/upload-image/{user}/edit', [ImageController::class,'storeImageEdit'])->middleware('auth');
 
