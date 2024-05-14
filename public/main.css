@@ -5,9 +5,6 @@ body,
   -moz-osx-font-smoothing: grayscale !important;
 }
 
-.header-bar {
-  background-color: #16a085;
-}
 
 .container--narrow {
   max-width: 732px;

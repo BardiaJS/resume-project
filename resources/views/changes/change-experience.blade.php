@@ -25,7 +25,7 @@
             @if (auth()->user()->isCreateCV == 1)
             @endif
             <div>
-              <a href="/" style="text-decoration:none; color:black; margin-left:0%"><img width="24" height="24" src="https://img.icons8.com/material-rounded/24/back--v1.png"/>Back</a>
+              <a href="/change-profile/{{auth()->user()->id}}" style="text-decoration:none; color:black; margin-left:0%"><img width="24" height="24" src="https://img.icons8.com/material-rounded/24/back--v1.png"/>Back</a>
             </div>
             <form action="/signout-user" method="POST" class="d-inline">
               @csrf

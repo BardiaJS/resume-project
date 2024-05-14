@@ -21,7 +21,7 @@ class ImageController extends Controller
     // Store Image
     public function storeImage(Request $request , User $user)
     {
-        $id = $user->id;
+            $id = $user->id;
 
             $requestData = $request->validate([
                 'avatar' => 'required|image|max:3000'

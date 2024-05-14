@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/main.css" />
     <script src="//unpkg.com/alpinejs" defer></script>
   </head>
-  <body style="background-image: url('/images/sunflower.jpg'); color:white">
+  <body style="background-image: url('/images/first-template.png'); color:rgb(0, 0, 0); background-repeat:no-repeat; background-size:cover; text-align:center; display:block; justify-content:center; align-items:center">
     <header class="header-bar mb-3">
       <div class="container d-flex flex-column flex-md-row align-items-center p-3">
         <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">OurApp</a></h4>
@@ -47,55 +47,72 @@
     </header>
     <!-- header ends here -->
     {{-- personal inforamtion --}}
-    <h1>Personal information</h1>
+    <div class="title" style="">
+      <h1 style="text-decoration:underline; font-weight:bold">Personal information</h1>
+    </div>
     <img src="{{auth()->user()->avatar}}" style="width:200px; height:200px; clip-path:circle(); margin-top:20px; margin-bottom: 20px"/>
-    <h3>Name: {{$personal->name}}</h3>
-    <h3>Family Name: {{$personal->familyName}}</h3>
-    <h3>Age: {{$personal->age}}</h3>
-    <h4>Gender: {{$personal->gender}}</h4>
-    <h4>Military: {{$personal->military}}</h4>
+    <h4 style="font-weight: bold">Name:</h4>
+    <h5 style="color: rgb(78, 77, 77)">{{$personal->name}}</h5>
+    <h4 style="font-weight: bold">Family Name:</h4>
+    <h5 style="color: rgb(78, 77, 77)">{{$personal->familyName}}</h5>
+    <h4 style="font-weight: bold">Age:</h4>
+    <h5 style="color: rgb(78, 77, 77)">{{$personal->age}}</h5>
+    <h4 style="font-weight: bold">Gender:</h4>
+    <h5 style="color: rgb(78, 77, 77)">{{$personal->gender}}</h5>
+    <h4 style="font-weight: bold">Military:</h4>
+    <h5 style="color: rgb(78, 77, 77)">{{$personal->military}}</h5>
     {{-- graduation infromation --}}
-    <h1>Graduation information</h1>
+    <div class="title">
+      <h1 style="text-decoration:underline; font-weight:bold">Graduation information</h1>
+    </div>
     @foreach ($graduations as $graduation)
-    <h3>Graduation Level: {{$graduation->level}}</h3>
-    <h3>major in high school: {{$graduation->high_school_major}}</h3>
-    <h3>major in university: {{$graduation->university_major}}</h3>
-    <h4>university name: {{$graduation->university_name}}</h4>
+    <h4 style="font-weight: bold">Graduation Level:</h4>
+    <h5 style="color: rgb(78, 77, 77)">{{$graduation->level}}</h5>
+    <h4 style="font-weight: bold">major in high school:</h4>
+    <h5 style="color: rgb(78, 77, 77)">{{$graduation->high_school_major}}</h5>
+    <h4 style="font-weight: bold">major in university:</h4>
+    <h5 style="color: rgb(78, 77, 77)">{{$graduation->university_major}}</h5>
+    <h4 style="font-weight: bold">university name:</h4>
+    <h5 style="color: rgb(78, 77, 77)">{{$graduation->university_name}}</h5>
     @endforeach
   
     
     {{-- skills information --}}
-    <h1>Skills information</h1>
-    <h2>The skills are</h2>
+    <div class="title">
+      <h1 style="text-decoration:underline; font-weight:bold">Skills</h1>
+    </div>
 
     <ol>
       @foreach ($skills as $skill)
-        <li>{{$skill->title}}: {{$skill->body}}</li><br>
+        <li style="color: rgb(78, 77, 77)">{{$skill->title}}: {{$skill->body}}</li><br>
       @endforeach
 
     </ol> 
 
        {{-- skills information --}}
-       <h1>Work Experience information</h1>
-       <h2>
+       <div class="title">
+        <h1 style="text-decoration:underline; font-weight:bold">Work Experience</h1>
+      </div>
+        
         @foreach ($experiences as $experience)
-        <h3> {{$experience->body}}</h3>
+        <h5 style="color: rgb(78, 77, 77)"> {{$experience->body}}</h5>
 
         @endforeach
-      </h2>
 
       @if ($graduationData == false && $skillData == false)
-      <h2>You should complete these information for better resume:</h2><a href="/create-cv-form/{{auth()->user()->id}}/skills">Skill</a>
-      <h2>You should complete these information for better resume:</h2><a href="/create-cv-form/{{auth()->user()->id}}/graduation">Graduation</a>
+      <h2 style="font-weight: bold; color:red">You should complete these information for better resume:</h2>
+      <a href="/create-cv-form/{{auth()->user()->id}}/skills">Skill</a>
+      <br>  
+      <a href="/create-cv-form/{{auth()->user()->id}}/graduation">Graduation</a>
       @elseif ($graduationData == false)
-      <h2>You should complete these information for better resume:</h2><a href="/create-cv-form/{{auth()->user()->id}}/graduation">Graduation</a>
+      <h2>You should complete these information for better resume:</h2><a href="/create-cv-form/{{auth()->user()->id}}/graduation" >Graduation</a>
       @elseif ($skillData == false)
       <h2>You should complete these information for better resume:</h2><a href="/create-cv-form/{{auth()->user()->id}}/skills">Skill</a>
       @endif
       
   
        <form action="/" method="GET" class="d-inline">
-        <div class="col-md-auto">
+        <div class="col-md-auto" style="margin-top: 30px; margin-bottom:20px">
           <button class="btn btn-primary btn-sm">Confirm</button>
         </div>
       </form>
