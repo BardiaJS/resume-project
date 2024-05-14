@@ -40,7 +40,7 @@ class GraduationController extends Controller
                 'university_name' => 'required',
                 'high_school_major' => 'required'
             ]);
-            $incomingFields['high_school_major'] = strip_tags($incomingFields['high_school_major']);;
+            $incomingFields['high_school_major'] = strip_tags($incomingFields['high_school_major']);
             $incomingFields['level'] = strip_tags($incomingFields['level']);
             $incomingFields['university_major'] = strip_tags($incomingFields['university_major']);
             $incomingFields['university_name'] = strip_tags($incomingFields['university_name']);
@@ -162,7 +162,8 @@ public function saveUpdateGraduation(Request $request, Graduation $graduation , 
         $incomingFields = $request->validate([
             'level'=>'required',
             'university_major'=>'required',
-            'university_name' => 'required'
+            'university_name' => 'required',
+            'high_school_major' => 'required'
         ]);
         $incomingFields['high_school_major'] =  strip_tags($incomingFields['high_school_major']);;
         $incomingFields['level'] = strip_tags($incomingFields['level']);
